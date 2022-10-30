@@ -1,0 +1,13 @@
+<mat-form-field floatLabel="never">
+    <input
+        matInput type="number" [ngModel]="answer | undefined"
+        [min]="question.conf.min" [max]="question.conf.max" [placeholder]="question.conf.placeholder"
+        [formControl]="control"
+        (input)="edited($event.target.value)">
+    <mat-hint *ngIf="question.conf.min !== null && question.conf.max !== null">Please enter a number between {{question.conf.min}} and {{question.conf.max}}</mat-hint>
+    <mat-hint *ngIf="question.conf.min !== null && question.conf.max === null">Please enter a number greater than or equal to {{question.conf.min}}</mat-hint>
+    <mat-hint *ngIf="question.conf.min === null && question.conf.max !== null">Please enter a number less than or equal to {{question.conf.max}}</mat-hint>
+    <mat-error *ngIf="control.errors?.required">Input is <b>required</b></mat-error>
+    <mat-error *ngIf="control.errors && control.errors.min">Number must be greater than or equal to {{question.conf.min}}</mat-error>
+    <mat-error *ngIf="control.errors && control.errors.max">Number must be less than or equal to {{question.conf.max}}</mat-error>
+</mat-form-field>

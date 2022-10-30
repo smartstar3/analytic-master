@@ -1,0 +1,46 @@
+<div class="background" [ngStyle]="{background: design.background}" >
+    <ng-container *ngIf="state==='starting'" >
+        <div class='animate'>
+            <app-answer-start-screen (started)="start()"></app-answer-start-screen >
+        </div>
+    </ng-container >
+
+    <div class="midden" *ngIf="state==='started'">
+        <mat-card  *ngFor="let q of path;
+        let i = index; let last = last; let first = first"
+        class="flex-me"
+        id="phase1"
+                   [ngStyle]="{'background' : design.card}" (keyup.enter)="tryGoToNext(i, q)">
+            <div [ngStyle]="fontStyle().getStyles()">
+            <mat-card-title id="{{i}}">{{qs.get[q].conf.description | stringifyDescription: answers}} </mat-card-title>
+            </div>
+            <div [ngStyle]="fontStyle().getStyles()">
+            <mat-card-content [ngStyle]="{'color' : design.answer}">
+                <app-question  [answer]="updater | get:q | async" [qid]="q" (changed)="editAnswer(i, q, $event)" (answered)="goToNext(i, q)"></app-question>
+            </mat-card-content>
+            </div>
+            <mat-card-actions [align]="'end'" *ngIf="editable(qs.get[q])">
+                <button mat-stroked-button *ngIf="last; else other" [disabled]="!answers.edited(q) && qs.get[q].conf.type !== questionTypes.TextQ" (click)="goToNext(i, q)"
+                            [ngStyle]="fontStyle().getStyles() && {'background' : design.button, 'color' : design.question}">Next</button>
+                <ng-template #other><button mat-stroked-button class="fake-button">Fake</button></ng-template>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <ng-container *ngIf="state==='ended' && endScreen !== undefined">
+        <div class='animate'>
+            <app-answer-end-screen [eid]="endScreen"></app-answer-end-screen>
+        </div>
+    </ng-container>
+
+
+    <div class="container">
+        <h6>{{progress}}% completed</h6>
+        <mat-progress-bar mode="determinate" [value]="progress" ></mat-progress-bar>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,146 @@
+<div class="content">
+    <mat-card class="stats">
+        <mat-card-header>
+            <mat-card-title>Feedback-Analytics <span class="primary">{{company?.plan | uppercase}}</span> plan</mat-card-title>
+            <mat-card-subtitle>
+                Collect up to <b>{{usage?.responsesUsage.maxAmount}}</b> Responses,
+                Create up to <b>{{usage?.formsUsage.maxAmount}}</b> Forms,
+                Publish <b>{{usage?.activeFormsUsage.maxAmount}}</b> Forms simultaneously,
+                And add up to <b>{{usage?.usersUsage.maxAmount}} </b>Teammates
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <div class="limits">
+                <div class="prog">
+                    <h6 class="primary">Teammates</h6>
+                    <mat-progress-bar [value]="this.usage?.usersUsage.progress" color="primary"></mat-progress-bar>
+                    <mat-hint><b>{{this.usage?.usersUsage.currentAmount}}</b> / {{this.usage?.usersUsage.maxAmount}}</mat-hint>
+                </div>
+                <div class="prog">
+                    <h6 class="primary">Active Forms</h6>
+                    <mat-progress-bar [value]="this.usage?.activeFormsUsage.progress" color="primary"></mat-progress-bar>
+                    <mat-hint><b>{{this.usage?.activeFormsUsage.currentAmount}}</b> / {{this.usage?.activeFormsUsage.maxAmount}}</mat-hint>
+                </div>
+                <div class="prog">
+                    <h6 class="primary">Total Forms</h6>
+                    <mat-progress-bar [value]="this.usage?.formsUsage.progress" color="primary"></mat-progress-bar>
+                    <mat-hint><b>{{this.usage?.formsUsage.currentAmount}}</b> / {{this.usage?.formsUsage.maxAmount}}</mat-hint>
+                </div>
+                <div class="prog">
+                    <h6 class="primary">Total Responses</h6>
+                    <mat-progress-bar [value]="this.usage?.responsesUsage.progress" color="primary"></mat-progress-bar>
+                    <mat-hint><b>{{this.usage?.responsesUsage.currentAmount}}</b> / {{this.usage?.responsesUsage.maxAmount}}</mat-hint>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="actions" [ngSwitch]='subscriptions.length'>
+        <div *ngSwitchCase='0'>
+            <mat-card-header class="action-header">
+                <mat-card-title>Get better results!</mat-card-title>
+                <mat-card-subtitle>Need more? Upgrade your plan to one that suits your exact needs!</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+            <mat-card-content class='info-content'>
+                <span>You can decide between <span class="primary">monthly and yearly</span> billing plans. Yearly billing plans get a <span class='primary'>5% discount</span>. Browse our plans using the button below!</span>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+            <mat-card-actions class="action-buttons">
+                <button routerLink="/pricing" mat-raised-button color="primary">See plans</button>
+            </mat-card-actions>
+        </div>
+
+        <div *ngSwitchCase='1'>
+            <div *ngIf="subscriptions[0]?.validUntil">
+                <mat-card-header class="action-header">
+                    <mat-card-title>Welcome to our paid service!</mat-card-title>
+                    <mat-card-subtitle>If you have any questions, problems or requests then don't hesitate to send an email to <a href='mailto:info@feedback-analytics.com'>our support team</a></mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class='info-content'>
+                    <span>Your <span class="primary">{{subscriptions[0]?.plan | uppercase}}</span> plan will be cancelled on <span class='primary'>{{subscriptions[0]?.validUntil | date}}</span>. To resume your plan please press the button below!</span>
+                </mat-card-content>
+            </div>
+
+            <div *ngIf="!subscriptions[0]?.validUntil && subscriptions[0].status !== 'unverified'">
+                <mat-card-header class="action-header">
+                    <mat-card-title>Welcome to our paid service!</mat-card-title>
+                    <mat-card-subtitle>If you have any questions, problems or requests then don't hesitate to send an email to <a href='mailto:info@feedback-analytics.com'>our support team</a></mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class='info-content'>
+                    <span>The ability to upgrade and downgrade your plan will be available soon. Please send an email to our support team if you need more info.</span>
+                </mat-card-content>
+            </div>
+
+            <div *ngIf="subscriptions[0].status === 'unverified'">
+                <mat-card-header class="action-header">
+                    <mat-card-title>Finish activating your <span class="primary">{{subscriptions[0]?.plan | uppercase}}</span> plan!</mat-card-title>
+                    <mat-card-subtitle>If you have any questions, problems or requests then don't hesitate to send an email to <a href='mailto:info@feedback-analytics.com'>our support team</a></mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class='info-content'>
+                    <span>Your {{subscriptions[0]?.interval}} <span class="primary">{{subscriptions[0]?.plan | uppercase}}</span> plan has not been activated yet. To activate your plan, please press the <span class='primary'>Activate plan</span> button below!</span>
+                </mat-card-content>
+            </div>
+
+            <mat-divider></mat-divider>
+            <mat-card-actions class="action-buttons">
+                <button (click)="onActivate()" *ngIf="subscriptions[0]?.status === 'unverified'" mat-raised-button color="accent">Activate plan</button>
+                <button (click)="onCancel()" *ngIf="!subscriptions[0]?.validUntil" mat-raised-button color="warn">Cancel {{subscriptions[0].status !== 'unverified' ? '' : 'unactivated'}} plan</button>
+                <button (click)="onResume()" *ngIf="subscriptions[0]?.validUntil" mat-raised-button color="accent">Resume plan</button>
+            </mat-card-actions>
+        </div>
+
+        <div *ngSwitchDefault>
+            <mat-card-header class="action-header">
+                <mat-card-title>You seem to have multiple active or unverified subscriptions!</mat-card-title>
+                <mat-card-subtitle>Please click on the cancel button to remove all subscriptions or send a mail to <a href='mailto:info@feedback-analytics.com'>our support team</a></mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-actions class="action-buttons">
+                <button (click)="onCancel()" mat-raised-button color="warn">Please cancel all plans</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+
+<!--    <table mat-table [dataSource]="dataSource" class="table">-->
+
+<!--        &lt;!&ndash; Status Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="status">-->
+<!--            <th mat-header-cell *matHeaderCellDef></th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.status}} </td>-->
+<!--        </ng-container>-->
+
+<!--        &lt;!&ndash; Date Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="date">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Date </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.date}} </td>-->
+<!--        </ng-container>-->
+
+<!--        &lt;!&ndash; Plan Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="plan">-->
+<!--            <th mat-header-cell *matHeaderCellDef> plan </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.plan}} </td>-->
+<!--        </ng-container>-->
+
+<!--        &lt;!&ndash; Amount Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="amount">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Amount </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>-->
+<!--        </ng-container>-->
+
+<!--        &lt;!&ndash; Download Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="invoice">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Invoice </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.invoice}} </td>-->
+<!--        </ng-container>-->
+
+<!--        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--    </table>-->
+</div>

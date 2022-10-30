@@ -1,0 +1,13 @@
+
+    <mat-form-field floatLabel="never">
+        <input matInput type="email"
+               [ngModel]="answer | undefined"
+               [placeholder]="question.conf.placeholder"
+               [formControl]="control"
+               [readonly]="disabled"
+               (input)="edited($event.target.value)">
+        <mat-error *ngIf="control.hasError('email') && !control.hasError('required')">
+            Please enter a valid email address</mat-error>
+        <mat-error *ngIf="control.hasError('required')">
+            Input is <b>required</b></mat-error>
+    </mat-form-field>

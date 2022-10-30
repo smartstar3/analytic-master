@@ -1,0 +1,35 @@
+<div class="export-options-dialog">
+    <h1 mat-dialog-title>Export Options</h1>
+    <div mat-dialog-content>
+        <div class="dialog-body">
+            <div class="section-container">
+                <mat-form-field>
+                    <mat-label>Select questions to export</mat-label>
+                    <mat-select [(value)]="exportOptions.questions" multiple>
+                        <mat-select-trigger>
+                            {{getSelectedQuestionList(exportOptions.questions)}}
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let item of questions" [value]="item">
+                            {{item + 1}}.{{data.questions[item]}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="section-container">
+                <mat-form-field>
+                    <mat-label>Select share information to export</mat-label>
+                    <mat-select [(value)]="exportOptions.shareInfos" multiple>
+                        <mat-option *ngFor="let item of shareInfos" [value]="item">{{item}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="section-container only-share-data">
+                <mat-checkbox [(ngModel)]="exportOptions.exportOnlyShareCenter">Only export for known user answers</mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-stroked-button (click)="handleClose()">Cancel</button>
+        <button mat-flat-button color="primary" [mat-dialog-close]="exportOptions">Ok</button>
+    </div>
+</div>

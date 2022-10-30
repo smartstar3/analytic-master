@@ -1,0 +1,14 @@
+.image-settings-container {
+  .image-set-button {
+    width: 100%;
+    border: 1px dashed #c4c4c4;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 5px;
+    outline: none;
+
+    &:hover {
+      background: #e0e0e0;
+    }
+  }
+}

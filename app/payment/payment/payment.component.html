@@ -1,0 +1,108 @@
+<div class="content">
+    <img class="base"  src="assets/img/Logo.png">
+    <mat-card class="base card">
+        <mat-card-header class="infoHeader">
+            <mat-card-title class="title">Feedback-Analytics - <span class="primary">{{this.plan?.title | uppercase}}</span> plan</mat-card-title>
+            <mat-card-subtitle class="subtitle">Priced at <b>€{{price(paymentForm.get('paymentInfo.interval').value)}}</b> a {{tag(paymentForm.get('paymentInfo.interval').value)}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider class="outer"></mat-divider>
+        <mat-card-content class="cardContent">
+            <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+
+                <div class="general" formGroupName="general">
+                    <h5 class="primary">General</h5>
+                    <div class="genders">
+                        <span class="genderText">Gender:</span>
+                        <div class="gender">
+                            <input id="male" type="radio" value="m" name="gender" formControlName="gender">
+                            <label for="male">Male</label>
+                        </div>
+                        <div class="gender">
+                            <input id="female" type="radio" value="f" name="gender" formControlName="gender">
+                            <label for="female">Female</label>
+                        </div>
+<!--                        // add other-->
+                    </div>
+                    <mat-form-field class="fields" >
+                        <mat-label>First Name</mat-label>
+                        <input matInput type="text" formControlName="firstName" required>
+                    </mat-form-field>
+                    <mat-form-field class="fields">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput type="text" formControlName="lastName" required>
+                    </mat-form-field>
+                    <mat-form-field class="fields">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email" required>
+                    </mat-form-field>
+                    <mat-form-field class="fields">
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput type="tel" formControlName="telephone" required>
+                    </mat-form-field>
+                </div>
+
+                <mat-divider class="inner"></mat-divider>
+
+                <div class="company" formGroupName="company">
+                    <h5 class="primary">Company</h5>
+                    <mat-form-field class="fields">
+                        <mat-label>Company Name</mat-label>
+                        <input matInput type="text" formControlName="companyName">
+                    </mat-form-field>
+                    <mat-form-field class="fields">
+                        <mat-label>VAT Number / Tax Number</mat-label>
+                        <input matInput type="text" formControlName="vatNumber">
+                    </mat-form-field>
+                </div>
+
+                <mat-divider class="inner"></mat-divider>
+
+                <div class="address" formGroupName="address">
+                    <h5 class="primary header">Address</h5>
+                    <mat-form-field class="postal">
+                        <mat-label>Postal Code</mat-label>
+                        <input matInput type="text" formControlName="postalcode" required>
+                    </mat-form-field>
+                    <mat-form-field class="house">
+                        <mat-label>House Number</mat-label>
+                        <input matInput type="text" formControlName="houseNumber" required>
+                    </mat-form-field>
+                    <mat-form-field class="houseAdd">
+                        <mat-label>House Number Additional</mat-label>
+                        <input matInput type="text" formControlName="houseNumberAdd">
+                    </mat-form-field>
+                    <mat-form-field class="street">
+                        <mat-label>Street</mat-label>
+                        <input matInput type="text" formControlName="street" required>
+                    </mat-form-field>
+                    <mat-form-field class="city">
+                        <mat-label>City</mat-label>
+                        <input matInput type="text" formControlName="city" required>
+                    </mat-form-field>
+                    <mat-form-field class="country">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="countryIso2" required>
+                            <mat-option *ngFor="let country of countryList" [value]="country.code">{{country.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div formGroupName="paymentInfo" class="interval">
+                    <h5 class="primary payment">Payment</h5>
+                    <span class="discount">Get a <b>5% discount</b> on yearly payments!</span>
+                    <mat-form-field >
+                        <mat-label>Interval</mat-label>
+                        <mat-select formControlName="interval">
+                            <mat-option [value]="'monthly'">Monthly - Full Price: €{{price('monthly')}} </mat-option>
+                            <mat-option [value]="'yearly'">Yearly - 5% Discount: €{{price('yearly')}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!paymentForm.valid">Checkout</button>
+                </div>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

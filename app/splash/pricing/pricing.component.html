@@ -1,0 +1,83 @@
+<section class="header">
+    <div class="text">
+        <div class="title">Choose the perfect plan for your business</div>
+    </div>
+    <div class="buttons">
+        <button class="abutton" mat-flat-button (click)="onClick('personal')" *ngIf="tabs === true">
+            <mat-icon>perm_identity</mat-icon>PERSONAL</button>
+        <button class="abutton blue" mat-flat-button (click)="onClick('personal')" *ngIf="tabs === false">
+            <mat-icon>perm_identity</mat-icon>PERSONAL</button>
+        <button class="abutton" mat-flat-button (click)="onClick('business')" *ngIf="tabs === false">
+            <mat-icon>business</mat-icon>BUSINESS</button>
+        <button class="abutton blue" mat-flat-button (click)="onClick('business')" *ngIf="tabs === true">
+            <mat-icon>business</mat-icon>BUSINESS</button>
+    </div>
+    <div class="images">
+        <img class="left" src="/assets/img/pricing/leftimage.png" alt="graph" />
+        <img class="right" src="/assets/img/pricing/rightimage.png" alt="analytics" />
+
+    </div>
+</section>
+
+<section class="cards">
+    <div class="container" *ngIf="tabs === false">
+        <div *ngFor="let card of personalPlans" class="flex-item">
+            <mat-card class="pricecard">
+                <mat-card-title class="uppercase">{{card.title}}</mat-card-title>
+                <mat-card-title><span class="month euro">€</span><span class="price">{{card.price}}</span><span class="month"> /month</span></mat-card-title>
+                <div class="content" *ngFor="let content of card.details; let i = index">
+                    <mat-card-content>
+                        <mat-icon class="checkmark">done</mat-icon>
+                        <span class="fat">{{content}}</span>
+                        <span *ngIf="i === 0">user</span>
+                        <span *ngIf="i === 1">active form(s)</span>
+                        <span *ngIf="i === 2">total forms</span>
+                        <span *ngIf="i === 3">responses a month</span>
+                    </mat-card-content>
+                </div>
+                <mat-card-actions>
+                    <button  mat-raised-button (click)="redirectUser(card.title)">Get the <span class="uppercase">{{card.title}}</span> plan</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <div class="container" *ngIf="tabs === true">
+        <div *ngFor="let card of businessPlans" class="flex-item">
+            <mat-card class="pricecard">
+                <mat-card-title class="uppercase">{{card.title}}</mat-card-title>
+                <mat-card-title><span class="month euro">€</span><span class="price">{{card.price}}</span><span class="month"> /month</span></mat-card-title>
+                <div class="content" *ngFor="let content of card.details; let i = index">
+                    <mat-card-content>
+                        <mat-icon class="checkmark">done</mat-icon>
+                        <span *ngIf="i === 0">up to</span>
+                        <span class="fat">{{content}}</span>
+                        <span *ngIf="i === 0">users</span>
+                        <span *ngIf="i === 1">active forms</span>
+                        <span *ngIf="i === 2">total forms</span>
+                        <span *ngIf="i === 3">responses a month</span>
+                    </mat-card-content>
+                </div>
+                <mat-card-actions>
+                    <button  mat-raised-button (click)="redirectUser(card.title)">Get the <span class="uppercase">{{card.title}}</span> plan</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</section>
+
+<section class="package">
+    <div class="text">
+        <div class="packackeTitle">All packages include</div>
+    </div>
+    <div class="containerCheck">
+        <div class="check" *ngFor="let feature of features;">
+            <mat-card class="packageCard">
+                <mat-card-content>
+                    <div class="feature"><mat-icon class="check_circle">check_circle</mat-icon>{{feature}}</div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</section>
+
+<app-get-started></app-get-started>

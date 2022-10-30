@@ -1,0 +1,23 @@
+.scalable-image {
+  .image {
+
+  }
+
+  .scale-down-btn {
+    margin-right: 10px;
+    outline: none;
+  }
+
+  .scale-up-btn {
+    margin-left: 10px;
+    outline: none;
+  }
+
+  .temp {
+    max-width:350px;
+    max-height:110px;
+    width: auto;
+    height: auto;
+    display: none;
+  }
+}

@@ -1,0 +1,22 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-card {
+    width: 60%;
+    max-width: 700px;
+    min-width: 400px;
+    overflow: hidden;
+
+    mat-form-field {
+      display: block;
+      width: 100%;
+    }
+
+    .link-container {
+      min-height: 166px;
+    }
+  }
+}

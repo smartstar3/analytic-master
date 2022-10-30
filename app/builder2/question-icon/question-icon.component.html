@@ -1,0 +1,13 @@
+<ng-container [ngSwitch]="type">
+        <mat-icon *ngSwitchCase="types.EmailQ" class="material-icons-round" inline="false">email</mat-icon>
+        <mat-icon *ngSwitchCase="types.MultipleChoiceQ" class="material-icons-round" inline="false">check_box</mat-icon>
+        <mat-icon *ngSwitchCase="types.NumberQ" class="material-icons-round" inline="false">looks_one</mat-icon>
+        <mat-icon *ngSwitchCase="types.PhoneNumberQ" class="material-icons-round" inline="false">phone</mat-icon>
+        <mat-icon *ngSwitchCase="types.PictureChoiceQ" class="material-icons-round" inline="false">image</mat-icon>
+        <mat-icon *ngSwitchCase="types.StarRatingQ" class="material-icons-round" inline="false">star_half</mat-icon>
+        <mat-icon *ngSwitchCase="types.TextQ" class="material-icons-round" inline="false">text_fields</mat-icon>
+        <mat-icon *ngSwitchCase="types.YesNoQ" class="material-icons-round" inline="false">check_circle</mat-icon>
+        <mat-icon *ngSwitchCase="types.OpenQ" class="material-icons-round" inline="false">text_format</mat-icon>
+        <mat-icon *ngSwitchCase="types.SliderChoiceQ" class="material-icons-round" inline="false">tune</mat-icon>
+        <mat-icon *ngSwitchCase="types.AddressQ" class="material-icons-round" inline="false">home</mat-icon>
+</ng-container>

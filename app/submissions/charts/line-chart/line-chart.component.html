@@ -1,0 +1,36 @@
+<div class="line-chart-container">
+    <ngx-charts-line-chart
+    *ngIf="question"
+    [results]="answers|multiserializer:question:timespan:dataform:cumulative"
+    [scheme]="colorScheme"
+    [legend]="true"
+    legendTitle=""
+    legendPosition="below"
+    [xAxis]="true"
+    [yAxis]="true"
+    [showGridLines]="true"
+    [roundDomains]="true"
+    [autoScale]="true"
+    [xAxisTickFormatting]="timespan|xAxisTickFormatting"
+    >
+    </ngx-charts-line-chart>
+</div>
+
+<div class="option-container">
+    <mat-form-field>
+        <mat-label>Timespan</mat-label>
+        <mat-select [(ngModel)]="timespan">
+            <mat-option value="weeks">Weeks</mat-option>
+            <mat-option value="months">Months</mat-option>
+            <mat-option value="years">Years</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="dataform">
+            <mat-option value="percentage">Percentage</mat-option>
+            <mat-option value="count">Count</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="cumulative">Cumulative</mat-checkbox>
+</div>

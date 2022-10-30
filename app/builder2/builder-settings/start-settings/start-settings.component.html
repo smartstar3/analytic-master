@@ -1,0 +1,33 @@
+<div class="settings-container">
+    <mat-accordion multi="true">
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>General</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <div [formGroup]="control" class="setting-container">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Title</mat-label>
+                        <input formControlName="title" matInput placeholder="My form">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Body</mat-label>
+                        <textarea formControlName="body" matInput placeholder="Welcome to my form"></textarea>
+                    </mat-form-field>
+                </div>
+            </ng-template>
+        </mat-expansion-panel>
+        <mat-expansion-panel expanded="true" *ngIf="this.ss.imageEnabled">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Image</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <app-image-settings (imageSelected)="setImage($event)"></app-image-settings>
+            </ng-template>
+        </mat-expansion-panel>
+        <button *ngIf="!this.ss.imageEnabled" class="addImage" (click)="addImage()" mat-stroked-button color="primary">Add Image</button>
+        <button *ngIf="this.ss.imageEnabled" class="addImage" (click)="removeImage()" mat-stroked-button color="primary">Remove Image</button>
+    </mat-accordion>
+</div>

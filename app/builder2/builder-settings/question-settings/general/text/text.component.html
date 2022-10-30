@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput type="text" placeholder="Insert a description or an example answer:" [ngModel]="qs.get[sel.id]?.conf.text"
+              (ngModelChange)="change($event)"></textarea>
+</mat-form-field>

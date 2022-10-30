@@ -1,0 +1,11 @@
+<mat-form-field>
+    <input matInput [matDatepicker]="startDatePicker" [max]="maxDate" readonly placeholder="Start Date" [(ngModel)]="startDate">
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput [matDatepicker]="endDatePicker" [min]="minDate" readonly placeholder="End Date" [(ngModel)]="endDate">
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+</mat-form-field>

@@ -1,0 +1,39 @@
+<div class="flex-container">
+    <ng-container *ngIf="ss.startEnabled">
+        <div class="group flex-item">
+            <span class="title">Start Screen</span>
+            <mat-divider class="divider"></mat-divider>
+        </div>
+        <app-start-screen class="flex-item" [disabled]="true" (click)="sel.selectStart()"></app-start-screen >
+    </ng-container>
+
+
+    <div class="group flex-item">
+        <span class="title">Questions</span>
+        <mat-divider class="divider"></mat-divider>
+        <span class="msg" *ngIf="qs.order.value.length === 0">A form with no questions is a sad form :-(</span>
+    </div>
+    <mat-card class="flex-item" *ngFor="let qid of qs.order|async; index as i" [id]="qid" (click)="sel.selectQ(qid)">
+        <mat-card-title>{{i + 1}}. {{description.descriptions[qid]}}</mat-card-title>
+        <mat-card-content>
+            <app-question [qid]="qid" [disabled]="true"></app-question>
+        </mat-card-content>
+    </mat-card>
+
+    <ng-container *ngIf="es.endEnabled">
+        <div class="group flex-item">
+            <span class="title">End Screens</span>
+            <mat-divider class="divider"></mat-divider>
+            <span class="msg" *ngIf="es.order.value.length === 0">Be sure to add an end screen</span>
+        </div>
+        <app-end-screen
+            class="flex-item"
+            [disabled]="true"
+            *ngFor="let eid of es.order|async; index as i"
+            [eid]="eid"
+            [id]="eid"
+            [index]="i"
+            (click)="sel.selectEnd(eid)">
+        </app-end-screen>
+    </ng-container>
+</div>

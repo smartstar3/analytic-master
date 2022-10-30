@@ -1,0 +1,19 @@
+<mat-toolbar [color]="'primary'">
+    <button mat-icon-button routerLink="/dash">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span class="spacing"></span>
+</mat-toolbar>
+
+<ng-container>
+    <div class="share-center">
+        <div class="share-actions">
+            <app-copy-link [companyLink]="companyLink"></app-copy-link>
+
+            <app-email-link [companyLink]="companyLink" [getEmailStatus]="getEmailStatus"></app-email-link>
+        </div>
+        <div class="share-status">
+            <app-email-status></app-email-status>
+        </div>
+    </div>
+</ng-container>

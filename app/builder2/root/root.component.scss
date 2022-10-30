@@ -1,0 +1,91 @@
+.builder-container {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.list-drawer {
+  width: 320px;
+}
+
+.settings-drawer {
+  width: 520px;
+}
+
+:host {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  .body-container {
+    flex-grow: 1;
+    height: calc(100vh - 64px);
+    width: 100vw;
+  }
+}
+
+.toolbar {
+  .size {
+    position: absolute;
+    visibility: hidden;
+    height: auto;
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .my-form-title {
+    max-width: 30%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+    line-break: anywhere;
+  }
+
+  .spacing {
+    flex: 1 1 auto;
+  }
+
+  .tabs {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .save-button,
+  .autosaveSymbol {
+    margin-right: 16px;
+    width: 65px;
+  }
+
+  .autosaveSymbol {
+    display: flex;
+    float: right;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .save-toggle {
+    margin-right: 8px;
+    font-size: 14px;
+  }
+
+  .mat-progress-spinner::ng-deep circle {
+    stroke: currentColor;
+  }
+
+  .back-btn {
+    overflow: hidden;
+  }
+
+  .my-form-title-input {
+    color: white;
+    background: transparent;
+    padding: 0 5px;
+    border: 1px solid white;;
+  }
+
+  ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: white;
+  }
+}

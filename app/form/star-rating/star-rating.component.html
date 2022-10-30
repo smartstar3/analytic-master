@@ -1,0 +1,42 @@
+
+<div id="container" class="mat-light-theme-yellow" *ngIf="question.conf.rating === 'star'">
+  <button class="button responsive" mat-icon-button color="primary"
+          *ngFor="let max of question.conf.max|loop; index as i"
+          (click)="select(i+1)"
+          [disableRipple]="disabled">
+      <mat-icon class="icon2" [style.color]="question.conf.color" *ngIf="(answer | filled:i)" >
+          star
+      </mat-icon>
+      <mat-icon class="icon2" [style.color]="question.conf.color" *ngIf="!(answer | filled:i)">
+          star_border
+      </mat-icon>
+  </button>
+</div>
+
+<div id="container2"  *ngIf="question.conf.rating === 'color'" >
+    <mat-button-toggle-group>
+        <mat-button-toggle
+            *ngFor="let max of question.conf.max|loop; index as i"
+            (click)="select(i+1)"
+            (mouseenter)="onHover(i+1)" (mouseleave)="afterHover()"
+            [disableRipple]="disabled"
+            [style]="{'width' : '45px', 'height':'45px'}"
+            [ngStyle]="mouseEnter ? {'background': background(i,true)} : {'background' : background(i, false)}"
+        ><div class="box">{{i + 1}}</div>
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
+
+
+<div  id="container3" *ngIf="question.conf.rating === 'emotion'">
+    <button mat-icon-button
+            *ngFor="let max of question.conf.max|loop; index as i"
+            (click)="select(i+1)"
+            [disableRipple]="disabled"
+            class="responsive"
+            (mouseenter)="onHover(i+1)" (mouseleave)="afterHover()"
+            [ngStyle]="(mouseEnter ? {'opacity' : opacity(i,true)} : {'opacity' : opacity(i, false)}) || (i < selected ? {'opacity' : '100%'} : {'opacity' : '35%'})"
+    >
+        <mat-icon svgIcon="{{SVGIcon(i)}}" class="emoticon"></mat-icon>
+    </button>
+</div>

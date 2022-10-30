@@ -1,0 +1,7 @@
+<mat-form-field floatLabel="never">
+  <input matInput type="tel" [ngModel]="answer | undefined" [placeholder]="question.conf.placeholder"
+         [formControl]="control" [readonly]="disabled" (input)="edited($event.target.value)" pattern="^([+]?)[0-9]{4,20}">
+  <mat-hint>Phone number must be of form: <b>+31612345678</b></mat-hint>
+  <mat-error *ngIf="control.hasError('required')">Input is <b>required</b></mat-error>
+  <mat-error *ngIf="control.hasError('phoneNumber')">Invalid phone number, must be of form: <b>+31612345678</b></mat-error>
+</mat-form-field>

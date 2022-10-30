@@ -1,0 +1,8 @@
+<div class="email-status-percentage-wrapper">
+    <div class="email-status-item-container"
+         *ngFor="let item of data"
+    >
+        <span class="email-status-title">{{ item.name | uppercase}}</span>
+        <span class="email-status-percentage">{{ item.extra.percent }}%</span>
+    </div>
+</div>

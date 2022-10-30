@@ -1,0 +1,37 @@
+<mat-card *ngIf="es.endEnabled" >
+  <mat-tab-group [(selectedIndex)]="selected" animationDuration="0ms">
+    <mat-tab *ngFor="let id of es.order|async; let i = index;" [label]="i+1"></mat-tab>
+  </mat-tab-group>
+  <div style="padding-top: 4px;">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Title" type="text" [ngModel]="es.get[eid]?.title" (ngModelChange)="titleChange($event)">
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="auto">
+      <mat-label>Body</mat-label>
+      <textarea matInput placeholder="Body" class="flex-me" [ngModel]="es.get[eid]?.body" (ngModelChange)="bodyChange($event)"></textarea>
+    </mat-form-field>
+    <div class="link-container" *ngIf="es.get[eid]?.linkEnabled">
+      <mat-form-field appearance="outline">
+        <mat-label>Button</mat-label>
+        <input matInput placeholder="Button" type="text" [ngModel]="es.get[eid]?.link.button" (ngModelChange)="linkButtonChange($event)">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>URL</mat-label>
+        <input matInput placeholder="URL" type="text" [ngModel]="es.get[eid]?.link.url" (ngModelChange)="linkUrlChange($event)">
+      </mat-form-field>
+    </div>
+    <input *ngIf="!es.get[eid]?.image" placeholder="Image" accept="image/png, image/jpeg" type="file" id="{{eid}}" (change)="onFileChange($event)">
+  </div>
+  <mat-card-actions>
+      <button mat-button (click)="delete()" [disabled]="(es.order|async).length === 1">Delete</button>
+      <button mat-button (click)="add()">Add</button>
+    <mat-slide-toggle [checked]="es.defaultEnd === eid" (change)="defaultToggle($event)" [disabled]="(es.order|async).length === 1 || (selected === 0 && es.defaultEnd === eid)">Default</mat-slide-toggle>
+    <mat-slide-toggle [checked]="es.get[eid]?.linkEnabled" (change)="linkEnableChange($event.checked)">Link</mat-slide-toggle>
+    <button mat-raised-button color="warn" (click)="es.endEnabled = false">Disable End Screen</button>
+    <button *ngIf="es.get[eid]?.image" mat-raised-button color="accent" (click)="removeImage()">Remove Image - {{es.get[eid]?.image?.name}}</button>
+  </mat-card-actions>
+
+</mat-card>
+
+<button *ngIf="!es.endEnabled" mat-raised-button color="primary" (click)="es.endEnabled = true">Enable End Screen</button>

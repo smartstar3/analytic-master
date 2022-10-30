@@ -1,0 +1,12 @@
+<div>
+	<form [formGroup]="uploadForm" (ngSubmit)="submit()">
+		<app-file-upload formControlName="image" [progress]="progress"></app-file-upload>
+	</form>
+
+	<div *ngFor="let data of images">
+		<img width="260px" src="data:image/png;base64,{{data.buffer.toString('base64')}}" name="{{data.hash}}"/>
+	</div>
+
+</div>
+
+

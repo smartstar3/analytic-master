@@ -1,0 +1,40 @@
+<mat-toolbar>
+    <a routerLink="/">
+        <img alt="logo" class="logo" width="200" src="assets/img/Logo.png">
+    </a>
+
+
+    <div fxShow="true" fxHide.lt-md="true">
+        <ng-container *ngFor="let page of pages">
+            <a mat-stroked-button *ngIf="!router.isActive(page, true)" color="primary" class="nav-links"
+               routerLink="/{{page}}">{{page | uppercase}} </a>
+            <a mat-flat-button *ngIf="router.isActive(page, true)" color="primary" class="nav-links"
+               routerLink="/{{page}}">{{page | uppercase}} </a>
+        </ng-container>
+    </div>
+
+    <span class="spacer"></span>
+
+    <div fxShow="true" fxHide.lt-md="true">
+        <a *ngIf="!router.isActive('login', true)" mat-stroked-button color="primary" routerLink="/login"
+           class="login nav-links">LOGIN</a>
+        <a *ngIf="router.isActive('login', true)" mat-flat-button color="primary" routerLink="/login"
+           class="login nav-links">LOGIN</a>
+
+        |
+
+        <a *ngIf="!router.isActive('register', true)" mat-stroked-button color="primary" routerLink="/register"
+           class="register nav-links">SIGN UP</a>
+        <a *ngIf="router.isActive('register', true)" mat-flat-button color="primary" routerLink="/register"
+           class="register nav-links">SIGN UP</a>
+    </div>
+
+    <div fxHide="true" fxShow.lt-md="true">
+        <a (click)="drawer.toggle()" mat-button>
+            <mat-icon>menu</mat-icon>
+        </a>
+    </div>
+</mat-toolbar>
+
+
+

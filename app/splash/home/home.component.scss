@@ -1,0 +1,418 @@
+body,
+.header {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat';
+}
+
+mat-card {
+  font-family: 'Montserrat';
+}
+
+.title {
+  font-size: 2em;
+  font-weight: 700;
+}
+////////////////////////////////////////////////////////////////////
+/////////////////////HEADER////////////////////////////////////////
+
+.header {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  min-height: calc(70vh - 28px);
+  align-items: center;
+}
+
+.introduction {
+  flex: 1;
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.cover {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  height: 50vh;
+}
+
+.stripe {
+  margin-top: 10px;
+  width: 40px;
+  height: 2px;
+  background-color: #224596;
+}
+
+.mainTitle {
+  font-size: 3.3em;
+  font-weight: 900;
+}
+.subTitle {
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-top: 1em;
+}
+
+.cta {
+  margin-top: 2em;
+}
+
+.cta-button {
+  background-color: #224596;
+  font-size: 1em;
+  font-weight: 500;
+  color: white;
+  width: fit-content;
+  filter: drop-shadow(0px 5px 3px grey);
+}
+
+.image {
+  content: url('../../../assets/img/homepage2/headerImage.png');
+  height: 100%;
+  filter: drop-shadow(0px 5px 3px grey);
+  animation: drop 1.2s ease;
+}
+
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .intro-text,
+  .cta {
+    text-align: center;
+  }
+
+  .cover {
+    margin-top: 30px;
+  }
+
+  .image {
+    height: 90%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .stripe {
+    margin-top: 30px;
+  }
+
+  .mainTitle {
+    font-size: 2em;
+  }
+
+  .subTitle {
+    font-size: 1.1em;
+  }
+
+  .cta-button {
+    font-size: 1em;
+  }
+
+  .cover {
+    height: 45vh;
+  }
+}
+
+////////////////////////////////////////////////////////////////////
+/////////////////////LOGOS/////////////////////////////////////////
+
+.trustBadges {
+  display: flex;
+  width: 70%;
+  margin: auto;
+  min-height: 30vh;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  margin-top: 3vh;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+img {
+  height: 7vh;
+}
+
+.abc {
+  animation: translate 1s ease;
+}
+
+.fox {
+  animation: translate 1.2s ease;
+}
+
+.cbs {
+  animation: translate 1.5s ease;
+}
+
+.nbc {
+  animation: translate 1.9s ease;
+}
+
+@keyframes translate {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  img {
+    height: 5vh;
+  }
+}
+@media screen and (max-width: 550px) {
+  .trustBadges {
+    width: 90%;
+    min-height: 20vh;
+  }
+
+  .logoTitle {
+    font-size: 0.8em;
+  }
+
+  img {
+    height: 4vh;
+  }
+}
+
+////////////////////////////////////////////////////////////////////
+/////////////////////How section////////////////////////////////////
+
+.howDoesItWork {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  background-color: #224596;
+}
+
+.howTitle {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 35px auto;
+}
+
+.whiteTitle {
+  color: white;
+}
+
+.number {
+  color: #1578c7;
+}
+
+.mat-cards {
+  display: grid;
+  height: 80%;
+  width: 100%;
+  grid-gap: 25px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+mat-card {
+  width: 30vw;
+  min-width: 300px;
+  height: 375px;
+  margin-bottom: 10px;
+
+  mat-card-subtitle {
+    font-size: 1.25em;
+    font-weight: 800;
+    color: #224596;
+    padding: 0 1em;
+  }
+
+  mat-card-content {
+    font-size: 1.1em;
+    padding: 0 2.4em;
+  }
+}
+
+.vector {
+  margin-left: 1em;
+  height: 100%;
+}
+
+@media screen and (max-width: 1525px) {
+  mat-card {
+    width: 40vw;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  mat-card {
+    height: 425px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .mat-cards {
+    display: grid;
+    height: 80%;
+    width: 100%;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+
+  mat-card {
+    width: 60vw;
+    height: 350px;
+  }
+
+  .vector {
+    height: 150px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .vector {
+    height: 100px;
+  }
+
+  mat-card {
+    height: 325px;
+    margin-bottom: 20px;
+    mat-card-subtitle {
+      font-size: 1.1em;
+      font-weight: 800;
+      margin-top: 2px;
+      padding: 0;
+    }
+
+    mat-card-content {
+      font-size: 1em;
+      padding: 0;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////
+/////////////////////PLAN section////////////////////////////////////
+
+.choosePlan {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  height: fit-content;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+
+.choosePlanTitle {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 35px auto;
+}
+
+.blueTitle {
+  color: #224596;
+}
+
+.choosePlanRow {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  min-height: 400px;
+  justify-content: space-between;
+}
+
+.choosePlanText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  min-width: 300px;
+  margin: 0 1em;
+}
+
+.planImageContainer {
+  flex: 1;
+  height: 20vh;
+  min-height: 300px;
+  max-height: 350px;
+  margin: 0 1em;
+}
+
+.planImage {
+  display: flex;
+  height: 100%;
+  max-height: 100%;
+}
+
+.planTitle {
+  font-size: 1.25em;
+  font-weight: 800;
+  color: #224596;
+}
+
+.planSubtitle {
+  font-size: 1.1em;
+  margin: 1em 0;
+}
+
+.cta-button {
+  background-color: #1578c7;
+  font-size: 1em;
+  font-weight: 500;
+  color: white;
+  width: fit-content;
+  filter: drop-shadow(0px 5px 3px grey);
+}
+
+@media screen and (max-width: 760px) {
+  .choosePlanRow {
+    flex-direction: column;
+  }
+
+  .reverse {
+    flex-direction: column-reverse;
+  }
+
+  .planTitle {
+    text-align: center;
+  }
+
+  .cta-button {
+    margin: auto;
+  }
+
+  .planImageContainer {
+    min-height: 250px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}

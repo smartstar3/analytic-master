@@ -1,0 +1,17 @@
+<mat-card>
+    <h4 mat-subheader>Your Link</h4>
+
+    <div class="link-section">
+        <div class="link-body" fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center">
+                <div fxLayout="column">
+                    <p class="link-title">Share Link</p>
+                    <p class="link-content">{{companyLink}}</p>
+                </div>
+                <button fxFlex="16" mat-icon-button color="primary" class="button-link" (click)="share()">
+                    <mat-icon>filter_none</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>

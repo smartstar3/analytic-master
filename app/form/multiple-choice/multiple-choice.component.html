@@ -1,0 +1,6 @@
+<div id="container">
+  <ng-container *ngFor="let choice of question.conf.choices; let i = index">
+    <button mat-stroked-button color="primary" *ngIf="!selected[i]" (click)="select(i)" [disableRipple]="disabled">{{choice}}</button>
+    <button mat-flat-button color="primary" *ngIf="selected[i]" (click)="select(i)" [disableRipple]="disabled">{{choice}}</button>
+  </ng-container>
+</div>

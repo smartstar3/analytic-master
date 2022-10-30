@@ -1,0 +1,97 @@
+<mat-card>
+    <h4 mat-subheader>Email Status</h4>
+
+    <app-percentage-bar [data]="emailStatistics | emailStatusSerializer">
+    </app-percentage-bar>
+
+    <div class="email-status-section">
+        <div class="email-filters">
+            <mat-form-field class="email-filter">
+                <mat-label>Select Email Status</mat-label>
+                <mat-select [(ngModel)]="emailStatusFilter" (ngModelChange)="applyFilter()">
+                    <mat-option *ngFor="let item of emailStatusFilterOptions" [value]="item">
+                        {{ item === '' ? 'ALL' : item | uppercase }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="legacy" class="email-filter search-box">
+                <mat-label>
+                    <mat-icon>search</mat-icon>
+                    Search by name or email</mat-label>
+                <input matInput placeholder="Placeholder" [(ngModel)]="emailSearchWord" (ngModelChange)="applyFilter()">
+            </mat-form-field>
+        </div>
+
+        <table mat-table
+               [dataSource]="dataSource"
+               matSort
+               (matSortChange)="onEmailSortChange($event)"
+               [matSortActive]="emailTableSort.active"
+               [matSortDirection]="emailTableSort.direction">
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                  [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                  [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null"
+                                  [checked]="selection.isSelected(row)"
+                                  [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th class="email-status-header" mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+                <td mat-cell *matCellDef="let element">
+                    <a mat-flat-button (click)="onViewResponse(element)">{{element.status | uppercase }}</a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>
+                    <button mat-icon-button color="primary"
+                            [disabled]="selection.selected.length === 0"
+                            (click)="onRemoveMultiShareInfos()"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="primary"
+                            (click)="onRemoveShareInfo(element.id)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns">
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="pageOptions"
+                       [pageIndex]="currentPage"
+                       [pageSize]="pageSize"
+                       [length]="shareInfoTotalCount"
+                       showFirstLastButtons
+                       (page)="onPageChange($event)"
+        >
+        </mat-paginator>
+    </div>
+</mat-card>

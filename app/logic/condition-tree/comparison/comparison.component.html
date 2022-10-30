@@ -1,0 +1,79 @@
+<ng-container *ngIf="control" [formGroup]="control">
+    <div class="top-row">
+        <mat-form-field class="selected-q">
+            <mat-select formControlName="q" [errorStateMatcher]="errMatcher">
+                <ng-container *ngIf="qs.pqs">
+                    <mat-option *ngFor="let q of qs.pqs.get; index as i;" [value]="i">
+                        {{i+1}}. {{q.conf.description|stringifyDescription}}
+                    </mat-option>
+                </ng-container>
+                <ng-container *ngIf="qs.bqs">
+                    <mat-option *ngIf="pos && !pos.exists(selected)" [value]="selected" disabled>[DELETED]</mat-option>
+                    <mat-option *ngFor="let id of qs.bqs.order.value|textOnlyFilter; let i = index" [value]="id">{{ i+1 }}. {{ds.descriptions[id]}}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-error *ngIf="control.get('q').hasError('exists')">Question is <b>deleted</b>.</mat-error>
+        </mat-form-field>
+        <div class="padding"></div>
+        <mat-form-field class="negate">
+            <mat-select formControlName="negate">
+                <mat-option [value]="false">Is</mat-option>
+                <mat-option [value]="true">Isn't</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="bottom-row">
+        <ng-container [ngSwitch]="checkType">
+            <ng-container *ngSwitchCase="'bool'">
+                <mat-form-field>
+                    <mat-select formControlName="val" [errorStateMatcher]="errMatcher">
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="val.hasError('required')">Value is <b>required</b>.</mat-error>
+                </mat-form-field>
+            </ng-container>
+            <ng-container *ngSwitchCase="'string'">
+                <mat-form-field>
+                    <input [errorStateMatcher]="errMatcher" matInput type="text" formControlName="val">
+                    <mat-error *ngIf="val.hasError('required')">Value is <b>required</b>.</mat-error>
+                </mat-form-field>
+            </ng-container>
+            <ng-container *ngSwitchCase="'number'">
+                <mat-form-field class="num-ops">
+                    <mat-select formControlName="op">
+                        <mat-option [value]="ops.Eq">=</mat-option>
+                        <mat-option [value]="ops.Lt">&lt;</mat-option>
+                        <mat-option [value]="ops.Lte">&le;</mat-option>
+                        <mat-option [value]="ops.Gt">&gt;</mat-option>
+                        <mat-option [value]="ops.Gte">&ge;</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="padding"></div>
+                <mat-form-field>
+                    <input [errorStateMatcher]="errMatcher" matInput type="number" formControlName="val">
+                    <mat-error *ngIf="val.hasError('required')">Value is <b>required</b>.</mat-error>
+                    <mat-error *ngIf="val.hasError('min')">Value cannot be less than {{q.conf.min}}.</mat-error>
+                    <mat-error *ngIf="val.hasError('max')">Value cannot be greater than {{q.conf.max}}.</mat-error>
+                </mat-form-field>
+            </ng-container>
+            <ng-container *ngSwitchCase="'choice'">
+                <mat-form-field>
+                    <mat-select [errorStateMatcher]="errMatcher" formControlName="val" [compareWith]="choiceCompare">
+                        <mat-option *ngFor="let choice of q.conf.choices; index as i" [value]="[i]">{{choice}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="val.hasError('required')">Value is <b>required</b>.</mat-error>
+                </mat-form-field>
+            </ng-container>
+            <ng-container *ngSwitchCase="'multi-choice'">
+                <!--            <mat-form-field>-->
+                <!--                <mat-select formControlName="val" multiple>-->
+                <!--                    <mat-option *ngFor="let choice of q.conf.choices; index as i" [value]="i">{{choice}}</mat-option>-->
+                <!--                </mat-select>-->
+                <!--                <mat-error *ngIf="value.hasError('required')">Value is <b>required</b>.</mat-error>-->
+                <!--            </mat-form-field>-->
+                todo: multi-choice implementation
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-container>

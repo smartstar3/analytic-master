@@ -1,0 +1,41 @@
+.image-list-container {
+  .image-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap: 10px;
+    padding: 10px;
+    max-height: calc(100% - 50px);
+    min-height: 180px;
+    overflow: auto;
+
+    app-image-selector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .no-image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .image-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}
+
+.loading-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

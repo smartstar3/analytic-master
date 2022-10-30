@@ -1,0 +1,21 @@
+<mat-card *ngIf="question">
+    <mat-card-header>
+        <mat-card-title>{{index+1}}. {{question.conf.description|stringifyDescription}}</mat-card-title>
+        <mat-card-subtitle>{{filteredAnswers.length}} Answers</mat-card-subtitle>
+        <span style="flex: 1 1 auto"></span>
+        <button mat-button [matMenuTriggerFor]="chartMenu" class="chart-selector">
+            <mat-icon>{{type|chartIcon}}</mat-icon>&nbsp;&nbsp;<mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #chartMenu="matMenu">
+            <button mat-menu-item [class.selected-chart]="type===charts.Line" (click)="type=charts.Line" *ngIf="question.conf.type|chartOptionAvailable:charts.Line"><mat-icon>show_chart</mat-icon><span>Line Chart</span></button>
+            <button mat-menu-item [class.selected-chart]="type===charts.Pie" (click)="type=charts.Pie" *ngIf="question.conf.type|chartOptionAvailable:charts.Pie"><mat-icon>pie_chart</mat-icon><span>Pie Chart</span></button>
+            <button mat-menu-item [class.selected-chart]="type===charts.VBar" (click)="type=charts.VBar" *ngIf="question.conf.type|chartOptionAvailable:charts.VBar"><mat-icon>equalizer</mat-icon><span>Bar Chart</span></button>
+            <button mat-menu-item [class.selected-chart]="type===charts.Star" (click)="type=charts.Star" *ngIf="question.conf.type|chartOptionAvailable:charts.Star"><mat-icon>notes</mat-icon><span>Star Chart</span></button>
+            <button mat-menu-item [class.selected-chart]="type===charts.List" (click)="type=charts.List" *ngIf="question.conf.type|chartOptionAvailable:charts.List"><mat-icon>list</mat-icon><span>List Chart</span></button>
+        </mat-menu>
+    </mat-card-header>
+    <app-date-selector [(startDate)]="startDate" [(endDate)]="endDate" (endDateChange)="filterAnswers()" (startDateChange)="filterAnswers()"></app-date-selector>
+    <div class="chart-container">
+        <app-chart [data]="filteredAnswers" [question]="question" [type]="type"></app-chart>
+    </div>
+</mat-card>

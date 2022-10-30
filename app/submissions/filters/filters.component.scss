@@ -1,0 +1,13 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .spacing {
+    flex-grow: 1;
+  }
+
+  .mat-dialog-actions {
+    margin-bottom: -12px;
+  }
+}

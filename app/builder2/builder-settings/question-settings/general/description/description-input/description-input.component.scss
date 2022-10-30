@@ -1,0 +1,20 @@
+.text-input {
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  font: inherit;
+  text-align: center;
+}
+
+.list-element {
+  display: inline-block;
+}
+
+.size {
+  position: absolute;
+  visibility: hidden;
+  height: auto;
+  width: auto;
+  white-space: nowrap;
+}

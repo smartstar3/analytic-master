@@ -1,0 +1,91 @@
+<div class="settings-container">
+    <mat-accordion multi="true" [formGroup]="control">
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>General</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Title</mat-label>
+                        <input formControlName="title" matInput placeholder="Thanks!">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Body</mat-label>
+                        <textarea formControlName="body" matInput placeholder="Thank you for filling in this form!"></textarea>
+                    </mat-form-field>
+                </div>
+            </ng-template>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" *ngIf="this.es.get[this.sel.id].mailEnabled">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="centered-panel-title">
+                    Mail
+                    <mat-icon color="primary"
+                              class="panel-description"
+                              matTooltip="Whenever this end screen is reached, a mail will be sent to below indicated email containing a link to the response and below written message.">
+                        info
+                    </mat-icon>
+                </mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <div formGroupName="mail">
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Send to</mat-label>
+                            <mat-select formControlName="sendTo" multiple>
+                                <mat-option *ngFor="let user of users" [value]="user.email" [disabled]="!user.verified" >{{user.email}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Subject</mat-label>
+                            <input formControlName="subject" matInput placeholder="Form 1.0 - E.3">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Message</mat-label>
+                            <textarea formControlName="message" matInput placeholder="On Form 1.0 this submission reached end screen 3."></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" *ngIf="this.es.get[this.sel.id].linkEnabled">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Link</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <div formGroupName="link">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Button</mat-label>
+                        <input formControlName="button" matInput placeholder="Click here!">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>URL</mat-label>
+                        <input formControlName="url" matInput placeholder="www.someurl.com">
+                    </mat-form-field>
+                </div>
+            </ng-template>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" *ngIf="this.es.get[this.sel.id].imageEnabled">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Image</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <app-image-settings (imageSelected)="setImage($event)"></app-image-settings>
+            </ng-template>
+        </mat-expansion-panel>
+        <button *ngIf="!this.es.get[this.sel.id].linkEnabled" class="addLink" (click)="addLink()" mat-stroked-button color="primary">Add Link</button>
+        <button *ngIf="this.es.get[this.sel.id].linkEnabled" class="addLink" (click)="removeLink()" mat-stroked-button color="primary">Remove Link</button>
+        <button *ngIf="!this.es.get[this.sel.id].imageEnabled" class="addLink" (click)="addImage()" mat-stroked-button color="primary">Add Image</button>
+        <button *ngIf="this.es.get[this.sel.id].imageEnabled" class="addLink" (click)="removeImage()" mat-stroked-button color="primary">Remove Image</button>
+        <button *ngIf="!this.es.get[this.sel.id].mailEnabled" class="addLink" (click)="addMail()" mat-stroked-button color="primary">Add Mail</button>
+        <button *ngIf="this.es.get[this.sel.id].mailEnabled" class="addLink" (click)="removeMail()" mat-stroked-button color="primary">Remove Mail</button>
+    </mat-accordion>
+</div>

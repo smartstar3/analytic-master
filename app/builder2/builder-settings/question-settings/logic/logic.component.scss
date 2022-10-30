@@ -1,0 +1,32 @@
+.addJumps {
+  width: 100%;
+  height: 48px;
+  margin-top: 16px;
+}
+
+.logic-jump-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .then {
+    flex-grow: 0;
+    margin-left: 18px;
+    margin-right: 12px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .then-selector {
+    flex-grow: 1;
+  }
+}
+
+.add-container {
+  display: flex;
+
+  .spacing {
+    flex-grow: 1;
+  }
+}

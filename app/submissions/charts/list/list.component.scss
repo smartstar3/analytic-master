@@ -1,0 +1,23 @@
+.selected {
+  background-color: #f6f6f6;
+}
+
+mat-row:hover {
+  cursor: pointer;
+}
+
+mat-table {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.table-address #mat-table-address{
+  padding-left: 0px;
+}
+
+.table-cell-address {
+  word-break: break-word;
+  padding-right: 5%;
+}
+

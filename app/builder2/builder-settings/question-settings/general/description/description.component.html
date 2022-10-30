@@ -1,0 +1,17 @@
+<div class="container">
+    <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <app-description-input [ngModel]="qs.get[sel.id]?.conf.description"
+                               (ngModelChange)="change($event)"></app-description-input>
+    </mat-form-field>
+    <button mat-icon-button color="primary" matTooltip="Recall information" [matMenuTriggerFor]="actionMenu">
+        <mat-icon>add</mat-icon>
+    </button>
+
+
+    <mat-menu #actionMenu="matMenu">
+        <button *ngFor="let id of (qs.order|async)|textOnlyFilter; let i = index" mat-menu-item (click)="addChip(id)">
+            Q{{i + 1}}. {{descriptions.descriptions[id]}}
+        </button>
+    </mat-menu>
+</div>

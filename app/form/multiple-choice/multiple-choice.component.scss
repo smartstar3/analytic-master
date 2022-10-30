@@ -1,0 +1,18 @@
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: -10px;
+  margin-right: -10px;
+  button {
+    margin-right: 10px;
+    margin-top: 10px;
+    flex-grow: 1;
+    width: auto;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+  }
+  button:last-child {
+    max-width: 50%;
+  }
+}

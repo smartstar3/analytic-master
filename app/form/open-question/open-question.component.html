@@ -1,0 +1,4 @@
+<mat-form-field floatLabel="never">
+    <input matInput type="text" [ngModel]="answer | undefined" [placeholder]="question.conf.placeholder" [readonly]="disabled" [formControl]="control" (input)="edited($event.target.value)">
+    <mat-error *ngIf="control.hasError('required')">Input is <b>required</b></mat-error>
+</mat-form-field>

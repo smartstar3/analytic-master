@@ -1,0 +1,45 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" color="primary">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span><a routerLink="/dash">
+                <img class="logo" width="200" src="assets/img/Logo.png">
+            </a>
+        </span>
+
+        <span class="spacer"></span>
+
+        <button mat-flat-button color="primary" id="logoutB" (click)="logout()" routerLink="/">LOGOUT</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #drawer [mode]="mode()" [opened]="!mo.isActive('sm') && !mo.isActive('xs')" role="navigation">
+        <mat-nav-list>
+            <h3 mat-subheader>Forms</h3>
+            <a mat-list-item routerLink="/dash" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon mat-list-icon>ballot</mat-icon>
+                <h4 mat-line>Forms</h4>
+            </a>
+            <a mat-list-item routerLink="/dash/archived" routerLinkActive="active">
+                <mat-icon mat-list-icon>archive</mat-icon>
+                <h4 mat-line>Archived</h4>
+            </a>
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/dash/billing" routerLinkActive="active">
+                <mat-icon mat-list-icon>receipt_long</mat-icon>
+                <h4 mat-line>Billing</h4>
+            </a>
+            <a mat-list-item routerLink="/dash/settings" routerLinkActive="active">
+                <mat-icon mat-list-icon>settings</mat-icon>
+                <h4 mat-line>Settings</h4>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

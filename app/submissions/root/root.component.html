@@ -1,0 +1,66 @@
+<mat-toolbar [color]="'primary'">
+    <button mat-icon-button routerLink="/dash"><mat-icon>arrow_back_ios</mat-icon></button>
+
+    <span>{{name.name}}</span>
+
+    <div class="center-container">
+        <mat-tab-group mat-stretch-tabs backgroundColor="primary" [(selectedIndex)]="tabs.value" animationDuration="0ms">
+            <mat-tab [disabled]="state!=='loaded'" label="Visualize"></mat-tab>
+            <mat-tab [disabled]="state!=='loaded'"  label="List"></mat-tab>
+        </mat-tab-group>
+    </div>
+
+    <span class="spacing"></span>
+
+    <button mat-button [disabled]="state!=='loaded'" [matMenuTriggerFor]="exportMenu"><mat-icon>present_to_all</mat-icon> Export</button>
+    <mat-menu #exportMenu="matMenu">
+        <button mat-menu-item (click)="onExport('xlsx')">Export To Excel</button>
+        <button mat-menu-item (click)="onExport('csv')">Export To CSV</button>
+    </mat-menu>
+
+
+    <span class="filter-text" *ngIf="filter"><b>{{filter.name}}</b></span>
+    <button mat-button [disabled]="state!=='loaded'" (click)="filterSidebar.toggle()"><mat-icon>filter_alt</mat-icon> Filters</button>
+</mat-toolbar>
+
+<ng-container *ngIf="state==='loaded'">
+    <mat-drawer-container [hasBackdrop]="false">
+        <mat-drawer class="submissions-sidebar" mode="side"  position="start" [opened]="tabs.value===tabs.LIST">
+            <app-submissions-list [submissionList]="submissionList"></app-submissions-list>
+        </mat-drawer>
+
+        <mat-drawer class="filters-sidebar" #filterSidebar mode="side" position="end">
+            <div class="add">
+                <button mat-icon-button (click)="createFilter()"><mat-icon>add</mat-icon></button>
+                <span class="add-text">New filter...</span>
+            </div>
+            <mat-list>
+                <ng-container *ngFor="let f of filters; last as last" >
+                    <mat-divider></mat-divider>
+                    <mat-list-item (click)="toggleFilter(f)" [class.selected]="filter?.id === f.id" matRipple>
+                        <div class="filter-option">
+                            <span class="filter-text">{{f.name}}</span>
+                            <span class="spacing"></span>
+                            <button mat-icon-button (mousedown)="$event.stopPropagation()" (click)="$event.stopPropagation(); editFilter(f)"><mat-icon>edit</mat-icon></button>
+                            <button mat-icon-button (mousedown)="$event.stopPropagation()" (click)="$event.stopPropagation(); deleteFilter(f)"><mat-icon>clear</mat-icon></button>
+                        </div>
+                    </mat-list-item>
+                    <mat-divider *ngIf="last"></mat-divider>
+                </ng-container>
+            </mat-list>
+        </mat-drawer>
+
+        <mat-drawer-content (click)="filterSidebar.close()">
+            <div class="visualization-container" [ngStyle]="{ 'display': tabs.value!==tabs.AGGREGATE ? 'none' : null}">
+                <app-visualization *ngFor="let pair of (qs.pqs.get | noTextOnly:answers); let i = index;" [question]="pair.question" [index]="i" [answers]="sortAnswersByDate(pair.answers)"></app-visualization>
+            </div>
+            <div class="submission-container" [ngStyle]="{ 'display': tabs.value!==tabs.LIST ? 'none' : null}">
+                <app-submission [submission]="selectedSubmission"></app-submission>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</ng-container>
+
+<div class="loading" *ngIf="state!=='loaded'">
+    <mat-spinner [diameter]="256" [strokeWidth]="16"></mat-spinner>
+</div>

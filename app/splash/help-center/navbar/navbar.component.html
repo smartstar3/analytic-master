@@ -1,0 +1,33 @@
+<mat-nav-list [disableRipple]="true" >
+    <mat-list-item routerLinkActive="selected-item" [routerLinkActiveOptions]="{exact: true}" routerLink="getting-started"
+                   matRipple class="list-item" (click)="showGettingStartedMenu = !showGettingStartedMenu">Getting started</mat-list-item>
+    <div class="sub-item-group" [ngClass]="{'expanded': showGettingStartedMenu, 'hidden' : !showGettingStartedMenu}">
+        <mat-list-item routerLinkActive="selected-item" routerLink="getting-started/create-account"  matRipple class="sub-item">How to create an FA account</mat-list-item>
+        <mat-list-item routerLinkActive="selected-item" routerLink="getting-started/my-first-form" matRipple class="sub-item">My first form</mat-list-item>
+        <mat-list-item routerLinkActive="selected-item" routerLink="getting-started/add-a-profile" matRipple class="sub-item">Add a profile</mat-list-item>
+    </div>
+
+
+    <mat-list-item matRipple class="list-item"
+                   routerLinkActive="selected-item" [routerLinkActiveOptions]="{exact: true}" routerLink="survey-design">Survey design</mat-list-item>
+
+
+    <mat-list-item matRipple class="list-item" (click)="questionsMenu = !questionsMenu"
+                   routerLinkActive="selected-item" [routerLinkActiveOptions]="{exact: true}" routerLink="questions" >Questions</mat-list-item>
+    <div class="sub-item-group" [ngClass]="{'expanded': questionsMenu, 'hidden' : !questionsMenu}">
+        <mat-list-item routerLinkActive="selected-item" routerLink="questions/question-types" matRipple class="sub-item">Question types</mat-list-item>
+        <mat-list-item routerLinkActive="selected-item" routerLink="questions/welcome-screen" matRipple class="sub-item">Welcome screen</mat-list-item>
+        <mat-list-item routerLinkActive="selected-item" routerLink="questions/end-screen" matRipple class="sub-item">End screen</mat-list-item>
+    </div>
+
+    <mat-list-item matRipple class="list-item" (click)="logicMenu = !logicMenu"
+                   routerLinkActive="selected-item" [routerLinkActiveOptions]="{exact: true}" routerLink="logic" >Logic</mat-list-item>
+    <div class="sub-item-group" [ngClass]="{'expanded': logicMenu, 'hidden' : !logicMenu}">
+        <mat-list-item routerLinkActive="selected-item" routerLink="logic/recall-information" matRipple class="sub-item">Recall Information</mat-list-item>
+        <mat-list-item routerLinkActive="selected-item" routerLink="logic/logic-jumps" matRipple class="sub-item">Logic Jumps</mat-list-item>
+        <mat-list-item routerLinkActive="selected-item" routerLink="logic/logic-jump-example" matRipple class="sub-item">Logic Jump Example</mat-list-item>
+        <mat-list-item routerLinkActive="selected-item" routerLink="logic/boolean-logic" matRipple class="sub-item">Boolean Logic</mat-list-item>
+    </div>
+
+
+</mat-nav-list>

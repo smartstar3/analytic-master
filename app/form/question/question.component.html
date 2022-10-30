@@ -1,0 +1,12 @@
+<ng-container  [ngSwitch]="question.conf.type">
+    <app-email *ngSwitchCase="qType.EmailQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-email>
+    <app-multiple-choice *ngSwitchCase="qType.MultipleChoiceQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-multiple-choice>
+    <app-number *ngSwitchCase="qType.NumberQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-number>
+    <app-phone-number *ngSwitchCase="qType.PhoneNumberQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-phone-number>
+    <app-star-rating  *ngSwitchCase="qType.StarRatingQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-star-rating>
+    <app-text *ngSwitchCase="qType.TextQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-text>
+    <app-open-question *ngSwitchCase="qType.OpenQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-open-question>
+    <app-yes-no *ngSwitchCase="qType.YesNoQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-yes-no>
+    <app-slider *ngSwitchCase="qType.SliderChoiceQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-slider>
+    <app-address-question *ngSwitchCase="qType.AddressQ" [answer]="answer" [qid]="qid" [disabled]="disabled" (changed)="changed.emit($event)" (answered)="answered.emit()"></app-address-question>
+</ng-container>

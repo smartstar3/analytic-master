@@ -1,0 +1,50 @@
+mat-toolbar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.share-center {
+  margin-top: 64px;
+  height: 100%;
+  background: #fafafa;
+  padding-top: 50px;
+  min-height: 100vh;
+  padding-bottom: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    min-width: 512px;
+    margin: 30px;
+
+    .mat-subheader {
+      display: flex;
+      box-sizing: border-box;
+      padding: 16px;
+      align-items: center
+    }
+
+  }
+
+  .share-actions {
+    flex: 1;
+    max-width: 800px;
+  }
+
+  .share-status {
+    flex: 1;
+    max-width: 800px;
+  }
+}

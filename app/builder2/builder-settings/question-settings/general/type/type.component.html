@@ -1,0 +1,15 @@
+<mat-form-field appearance="fill">
+    <mat-label>Type</mat-label>
+    <mat-select [value]="qs.get[sel.id].conf.type" (selectionChange)="change($event.value)">
+        <mat-select-trigger>
+            <div class="trigger">
+                <app-question-icon class="icon" [type]="qs.get[sel.id].conf.type"></app-question-icon>
+                <span>{{qs.get[sel.id].conf.type | typeString}}</span>
+            </div>
+        </mat-select-trigger>
+        <mat-option *ngFor="let type of types" [value]="type">
+            <app-question-icon class="icon" [type]="type"></app-question-icon>
+            {{type | typeString}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

@@ -1,0 +1,58 @@
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
+  min-width: 512px;
+  margin: 30px;
+}
+
+.mat-subheader {
+  display: flex;
+  box-sizing: border-box;
+  padding: 16px;
+  align-items: center
+}
+
+.email-status-section {
+  width: 100%;
+
+  table {
+    width: 100%;
+
+    .email-status-header {
+      padding-left: 16px;
+    }
+  }
+
+  .email-filters {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+
+    .email-filter {
+      flex: 1;
+
+      &.search-box {
+        flex: 2;
+      }
+
+      &:first-child {
+        margin-right: 30px;
+      }
+
+      mat-label {
+        display: flex;
+        align-items: center;
+
+        mat-icon {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+app-percentage-bar {
+  width: 100%;
+}

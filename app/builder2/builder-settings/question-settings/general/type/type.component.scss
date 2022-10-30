@@ -1,0 +1,11 @@
+mat-option .icon {
+  color: rgba(0, 0, 0, 0.75) !important;
+}
+.trigger {
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  .icon {
+    margin: 0 12px;
+  }
+}

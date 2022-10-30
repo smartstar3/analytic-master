@@ -1,0 +1,31 @@
+<div class="backgroundImage">
+  <div class="background">
+    <div *ngIf="loading" class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="!loading">
+      <mat-card class="card">
+        <div *ngIf="success">
+          <mat-card-title>
+            <h1>Congratulations!</h1>
+          </mat-card-title>
+          <mat-card-content>
+            <p>Your email was verified successfully. <br />You can close this page.</p>
+          </mat-card-content>
+        </div>
+        <div *ngIf="!success">
+          <mat-card-title>
+            <h1>Oops, Something went wrong!</h1>
+          </mat-card-title>
+          <mat-card-content>
+            <br />
+            <p>
+              It seems that we had trouble verifying your email address. <br />
+              Please request another verification email or contact our support.
+            </p>
+          </mat-card-content>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

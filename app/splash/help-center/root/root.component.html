@@ -1,0 +1,23 @@
+<app-header [title]="titles[router.url]"></app-header>
+
+
+<mat-sidenav-container>
+
+    <mat-sidenav #nav [mode]="mode()" [opened]="!mo.isActive('sm') && !mo.isActive('xs')" role="navigation">
+        <app-navbar></app-navbar>
+    </mat-sidenav>
+
+
+    <mat-sidenav-content>
+        <button mat-mini-fab class="button" color="primary" (click)="nav.toggle()" fxShow="true" fxHide.gt-sm="true"><mat-icon>menu</mat-icon></button>
+
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+<div class="body">
+    <button  class="top" mat-button color="primary" (click)="toTop()">Go to top</button>
+</div>
+

@@ -1,0 +1,24 @@
+<div class="content" *ngIf="subscriptions.length === 0; else content">
+    <mat-spinner></mat-spinner>
+</div>
+<ng-template #content>
+    <div class="content">
+        <img src="assets/img/favicon.png">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title class="primary">Welcome to Feedback-Analytics!</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <span class="text">Your Feedback-Analytics <span class="primary">{{subscriptions[0].plan | uppercase}}</span> plan was purchased successfully!</span>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="buttons">
+                    <button mat-button routerLink="/dash">Go to Dashboard</button>
+                    <button mat-button routerLink="/dash/billing">Go to Billing</button>
+                    <button mat-button routerLink="/dash/settings">Invite more teammates</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</ng-template>
+

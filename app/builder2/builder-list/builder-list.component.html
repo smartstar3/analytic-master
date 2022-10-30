@@ -1,0 +1,115 @@
+<mat-selection-list [multiple]="false" [compareWith]="compare" [ngModel]="selection">
+    <div mat-subheader>
+        <button mat-icon-button (click)="startExpand = !startExpand">
+            <mat-icon *ngIf="startExpand">expand_more</mat-icon>
+            <mat-icon *ngIf="!startExpand">chevron_right</mat-icon>
+        </button>
+        Start Screen
+        <span class="spacing"></span>
+        <mat-slide-toggle [matTooltip]="ss.startEnabled|toggleText|titlecase" (change)="ss.startEnabled=$event.checked" [checked]="ss.startEnabled"></mat-slide-toggle>
+    </div>
+    <ng-container *ngIf="startExpand">
+        <ng-container *ngIf="ss.startEnabled">
+            <mat-list-option [disabled]="!ss.startEnabled" [value]="{type: 'start'}" (click)="sel.selectStart()" id="start-screen">
+                <mat-icon mat-list-icon>chat</mat-icon>
+                <div mat-line>{{ss.title ? ss.title : "Empty title"}}</div>
+                <div mat-line> {{ss.body}}</div>
+            </mat-list-option>
+        </ng-container>
+        <ng-container *ngIf="!ss.startEnabled">
+            <div class="list-text">Start screen disabled...</div>
+        </ng-container>
+    </ng-container>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>
+        <button mat-icon-button (click)="questionExpand = !questionExpand">
+            <mat-icon *ngIf="questionExpand">expand_more</mat-icon>
+            <mat-icon *ngIf="!questionExpand">chevron_right</mat-icon>
+        </button>
+        Questions
+    </div>
+    <div *ngIf="questionExpand" cdkDropList class="drop-list" (cdkDropListDropped)="qs.move($event.previousIndex, $event.currentIndex)">
+        <mat-list-option *ngFor="let qid of qs.order|async; index as i" cdkDrag class="drop-list-item" [value]="{type: 'question', id: qid}" (click)="sel.selectQ(qid)" [id]="qid">
+            <app-question-icon [type]="qs.get[qid].conf.type" mat-list-icon></app-question-icon>
+            <div class="question-wrapper">
+                <div mat-line class="question-title">
+                    {{i + 1}}. {{description.descriptions[qid]}}
+                </div>
+                <button mat-icon-button [matMenuTriggerFor]="actionMenu"><mat-icon>more_vert</mat-icon></button>
+            </div>
+            <mat-menu #actionMenu="matMenu">
+                <button mat-menu-item (click)="duplicateQuestion(qid)">
+                    <mat-icon>file_copy</mat-icon>Duplicate
+                </button>
+                <button mat-menu-item (click)="qs.deleteAt(pos.get[qid])">
+                    <mat-icon>delete</mat-icon>Delete
+                </button>
+            </mat-menu>
+            <ng-container *ngIf="qid && (err.get('questions.'+qid).flatChange|async) as errstate">
+                <div mat-line *ngIf="errstate.error?.length > 1"><span class="error-msg">{{errstate.error.length}} errors</span></div>
+                <div mat-line *ngIf="errstate.error?.length === 1"><span class="error-msg">{{errstate.error[0]}}</span></div>
+                <ng-container *ngIf="!errstate.error || errstate.error.length === 0">
+                    <div mat-line *ngIf="errstate.warning?.length > 1"><span class="warn-msg">{{errstate.warning.length}} warnings</span></div>
+                    <div mat-line *ngIf="errstate.warning?.length === 1"><span class="warn-msg">{{errstate.warning[0]}}</span></div>
+                </ng-container>
+            </ng-container>
+        </mat-list-option>
+        <mat-list-item class="add-item"  [matMenuTriggerFor]="qsTypeMenu"  (mousedown)="$event.preventDefault()">
+            <mat-icon mat-list-icon>add</mat-icon>
+            <div mat-line>Add question...</div>
+        </mat-list-item>
+        <mat-menu #qsTypeMenu="matMenu" yPosition="below" xPosition="before">
+            <button mat-menu-item *ngFor="let type of types" (click)="addNewQuestion(type)">
+                <app-question-icon class="icon" [type]="type"></app-question-icon>
+                {{type | typeString}}
+            </button>
+        </mat-menu>
+    </div>
+    <mat-divider></mat-divider>
+    <div mat-subheader>
+        <button mat-icon-button (click)="endExpand = !endExpand">
+            <mat-icon *ngIf="endExpand">expand_more</mat-icon>
+            <mat-icon *ngIf="!endExpand">chevron_right</mat-icon>
+        </button>
+        End Screens
+        <span class="spacing"></span>
+        <mat-slide-toggle [matTooltip]="es.endEnabled|toggleText|titlecase" (change)="es.endEnabled=$event.checked" [checked]="es.endEnabled"></mat-slide-toggle>
+    </div>
+
+    <ng-container *ngIf="endExpand">
+        <div *ngIf="es.endEnabled" cdkDropList class="drop-list" (cdkDropListDropped)="es.move($event.previousIndex, $event.currentIndex)">
+            <mat-list-option *ngFor="let eid of es.order|async; index as i" [disabled]="!es.endEnabled" cdkDrag class="drop-list-item" [value]="{type: 'end', id: eid}" (click)="sel.selectEnd(eid)" [id]="eid">
+                <mat-icon mat-list-icon>comment</mat-icon>
+                <div class="question-wrapper">
+                    <div class="question-title">
+                        <div mat-line>E{{i + 1}}. {{es.get[eid].title ? es.get[eid].title : "Empty title"}}</div>
+                        <div mat-line *ngIf="eid === es.defaultEnd">Default</div>
+                        <div mat-line *ngIf="eid !== es.defaultEnd"></div>
+                    </div>
+                    <button mat-icon-button [matMenuTriggerFor]="actionMenu"><mat-icon>more_vert</mat-icon></button>
+                </div>
+                <mat-menu #actionMenu="matMenu">
+                    <button mat-menu-item (click)="duplicateEnd(eid)">
+                        <mat-icon>file_copy</mat-icon>Duplicate
+                    </button>
+                    <button mat-menu-item (click)="es.deleteAt(-(pos.get[eid]+1))">
+                        <mat-icon>delete</mat-icon>Delete
+                    </button>
+                    <button mat-menu-item (click)="setDefaultEnd(eid)">
+                        <mat-icon>comment</mat-icon>Set as default
+                    </button>
+                </mat-menu>
+
+            </mat-list-option>
+            <mat-list-item class="add-item" (click)="es.addNew()" (mousedown)="$event.preventDefault()">
+                <mat-icon mat-list-icon>add</mat-icon>
+                <div mat-line>Add end screen...</div>
+            </mat-list-item>
+        </div>
+
+        <ng-container *ngIf="!es.endEnabled">
+            <div class="list-text">End screen disabled...</div>
+        </ng-container>
+    </ng-container>
+</mat-selection-list>

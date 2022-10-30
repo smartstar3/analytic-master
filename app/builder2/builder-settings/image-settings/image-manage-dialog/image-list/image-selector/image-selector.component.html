@@ -1,0 +1,7 @@
+<div class="image-selector" (click)="toggleCheck()" [ngClass]="{'selected': checked}">
+    <div class="image-box">
+        <img src="{{image.path}}" name="{{image.hash}}"/>
+        <mat-icon *ngIf="checked" class="check-icon">check_box</mat-icon>
+    </div>
+    <span class="image-name">{{image.name}}</span>
+</div>

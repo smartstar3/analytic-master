@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<mat-list mat-dialog-content>
+    <mat-form-field style="width: 100%">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" [(ngModel)]="data.user.firstName" required/>
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" [(ngModel)]="data.user.lastName" required/>
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="data.user.email" [disabled]="data.disableEmail" required/>
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="data.user.role" required>
+            <mat-option value="owner">Owner</mat-option>
+            <mat-option value="admin">Admin</mat-option>
+            <mat-option value="editor">Editor</mat-option>
+            <mat-option value="member">Member</mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-list>
+<div mat-dialog-actions style="justify-content: space-between">
+    <button type="Button" mat-stroked-button (click)="noClick()" style="flex: auto; margin-right: 24px">Cancel</button>
+    <button type="Button" mat-flat-button color="primary" [mat-dialog-close]="data.user" style="flex: auto">{{data.action}}</button>
+</div>

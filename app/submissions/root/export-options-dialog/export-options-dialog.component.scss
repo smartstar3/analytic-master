@@ -1,0 +1,19 @@
+.export-options-dialog {
+  min-width: 400px;
+
+  .dialog-body {
+    .section-container {
+      .section-title {
+        margin-bottom: 5px;
+      }
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      &.only-share-data {
+        margin-top: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<div class="upload-image__body">
+    <div class="upload-image__input-wrapper" [style.width.px]="containerWidth">
+        <mat-form-field class="input-full-width">
+            <mat-label>Uploaded file name</mat-label>
+            <input matInput placeholder="file name" required [(ngModel)]="imageManagerOptions.meta.name">
+        </mat-form-field>
+    </div>
+    <div class="upload-image__container">
+        <app-slim
+            [options]="imageManagerOptions"
+            [style.width.px]="containerWidth"
+            [style.height.px]="containerHeight"
+        >
+            <input placeholder="Upload Your Image" accept="image/png, image/jpeg" type="file" >
+        </app-slim>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div>
+    <div class="choices"
+         cdkDropListGroup
+    >
+        <div *ngFor="let choice of qs.get[sel.id]?.conf.choices; let i = index"
+             cdkDropList
+             [cdkDropListData]="i"
+             (cdkDropListDropped)="drop($event)"
+             cdkDropListOrientation="horizontal"
+             class="mc-chip-wrapper"
+        >
+            <div
+                class="mc-chip"
+                cdkDrag [cdkDragData]="i"
+                contenteditable="true"
+                (click)="selectChoice(i)">
+                <app-question-choice
+                    [selected]="editingChoice === i"
+                    [content]="choice"
+                    (contentChange)="choiceContentChange($event, i)"
+                ></app-question-choice>
+                <mat-icon (click)="remove(i)">cancel</mat-icon>
+            </div>
+        </div>
+        <input class="choice-input"
+               placeholder="New choice..."
+               [(ngModel)]="choiceInput"
+               (keydown)="onInputKeyDown($event)"
+               (blur)="addChoice()" />
+    </div>
+    <div class="err-display" *ngIf="error.show && (error.valueChange| async) as errState">
+    <mat-error *ngIf="errState.error">{{errState.error}}</mat-error>
+    <mat-hint *ngIf="errState.warning">{{errState.warning}}</mat-hint>
+    </div>
+</div>

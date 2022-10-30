@@ -1,0 +1,71 @@
+<mat-toolbar class="toolbar" color="primary">
+    <button class="back-btn" mat-icon-button routerLink="/dash"><mat-icon>arrow_back_ios</mat-icon></button>
+    <span *ngIf="!formTitleEditMode"
+          class="my-form-title"
+          (click)="enableTitleEditMode()"
+    >{{ns.name}}</span>
+    <ng-container *ngIf="formTitleEditMode">
+        <div class="size" #size>{{ns.name}}</div>
+        <input
+                class="my-form-title-input"
+                type="text"
+                minlength="1"
+                [(ngModel)]="ns.name"
+                (blur)="updateFormTitle()"
+                (keydown)="onKeyDown($event)"
+                [style.width.px]="size.clientWidth+20"
+                [style.maxWidth]="'30%'"
+        />
+    </ng-container>
+
+    <mat-tab-group #tabGroup class="tabs" mat-align-tabs="center" color="primary" backgroundColor="primary" animationDuration="0ms" [selectedIndex]="tab" (selectedIndexChange)="select($event)">
+        <mat-tab [disabled]="!loaded" label="Build"></mat-tab>
+        <mat-tab [disabled]="!loaded" label="Test"></mat-tab>
+        <mat-tab [disabled]="!loaded || true" label="Design"></mat-tab>
+<!--        <mat-tab [disabled]="!loaded || true" label="Graph"></mat-tab>-->
+    </mat-tab-group>
+
+    <span class="spacing"></span>
+
+    <mat-slide-toggle [checked]="!save.disabled" (change)="save.disabled = !save.disabled" class="save-toggle" labelPosition="before">Autosave</mat-slide-toggle>
+    <button class="save-button" *ngIf="save.disabled" [disabled]="!loaded" mat-raised-button [color]="'primary'" (click)="save.save(true)">Save</button>
+    <div *ngIf="!save.disabled" class="autosaveSymbol">
+        <mat-progress-spinner *ngIf="save.status === ('waiting' || 'saving')" [mode]="'indeterminate'" diameter="20" matTooltip="Saving Form"></mat-progress-spinner>
+        <mat-icon *ngIf="save.status === 'saved'" matTooltip="Form saved successfully">done</mat-icon>
+        <mat-icon *ngIf="save.status === 'error'" matTooltip="Form didn't save">clear</mat-icon>
+    </div>
+</mat-toolbar>
+<mat-progress-bar color="accent" mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>
+
+<div class="body-container" [ngSwitch]="tab" *ngIf="loaded">
+    <ng-container *ngSwitchCase="0" [ngTemplateOutlet]="build"></ng-container>
+    <ng-container *ngSwitchCase="1" [ngTemplateOutlet]="test"></ng-container>
+    <ng-container *ngSwitchCase="2" [ngTemplateOutlet]="design"></ng-container>
+    <ng-container *ngSwitchCase="3" [ngTemplateOutlet]="graph"></ng-container>
+</div>
+
+
+<ng-template #build>
+    <mat-drawer-container class="builder-container">
+        <mat-drawer mode="side" position="start" [opened]="true" class="list-drawer">
+            <app-builder-list></app-builder-list>
+        </mat-drawer>
+        <mat-drawer mode="side" position="end" [opened]="sel.selected" class="settings-drawer">
+            <app-builder-settings></app-builder-settings>
+        </mat-drawer>
+        <mat-drawer-content class="builder-elements-container">
+            <app-form-preview></app-form-preview>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</ng-template>
+
+<ng-template #test>
+    <app-builder-test></app-builder-test>
+</ng-template>
+
+<ng-template #design>
+</ng-template>
+
+<ng-template #graph>
+</ng-template>
+

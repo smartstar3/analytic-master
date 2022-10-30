@@ -1,0 +1,8 @@
+<mat-form-field appearance="outline">
+    <mat-label>Stars</mat-label>
+    <input matInput type="number" max="10" min="5" placeholder="Set the amount of stars..." [formControl]="control" [errorStateMatcher]="errMatcher" (blur)="showErrState()">
+    <ng-container *ngIf="error?.valueChange|async as errorState">
+        <mat-error *ngIf="errorState.error">{{errorState.error}}</mat-error>
+    </ng-container>
+</mat-form-field>
+

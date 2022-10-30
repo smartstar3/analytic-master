@@ -1,0 +1,17 @@
+<mat-card *ngIf="ss.startEnabled">
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="Title" type="text" [(ngModel)]="ss.title">
+  </mat-form-field>
+  <mat-form-field appearance="outline" floatLabel="auto">
+    <mat-label>Body</mat-label>
+    <textarea matInput placeholder="Body" [(ngModel)]="ss.body"></textarea>
+  </mat-form-field>
+  <input *ngIf="!ss.image" placeholder="Image" accept="image/png, image/jpeg" type="file" (change)="onFileChange($event)">
+  <mat-card-actions>
+    <button mat-raised-button color="warn" (click)="ss.startEnabled = false">Disable Start Screen</button>
+    <button *ngIf="ss.image" mat-raised-button color="accent" (click)="removeImage()">Remove Image - {{ss.image?.name}}</button>
+  </mat-card-actions>
+</mat-card>
+
+<button *ngIf="!ss.startEnabled" mat-raised-button color="primary" (click)="ss.startEnabled = true">Enable Start Screen</button>

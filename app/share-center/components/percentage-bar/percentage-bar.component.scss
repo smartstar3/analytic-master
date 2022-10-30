@@ -1,0 +1,22 @@
+.email-status-percentage-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 15px;
+
+  .email-status-item-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 140px;
+    margin: 5px 0;
+
+    .email-status-title {
+      font-size: 16px;
+      color: #828282;
+    }
+
+    .email-status-percentage {
+
+    }
+  }
+}

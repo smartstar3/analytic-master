@@ -1,0 +1,15 @@
+<mat-chip-list *ngIf="value | isChipPart" class="list-element" [selectable]="false"><mat-chip [disabled]="disabled" removable (removed)="remove.emit()">
+        <ng-container *ngIf="!pos.exists(value.qid)">[DELETED]</ng-container>
+        <ng-container *ngIf="pos.exists(value.qid)">Q{{pos.get[value.qid]+1}}</ng-container>
+    <mat-icon matChipRemove>cancel</mat-icon>
+</mat-chip></mat-chip-list>
+<ng-container *ngIf="!(value | isChipPart)">
+    <div class="size" #size>{{value}}</div>
+    <input class="text-input list-element"
+           [disabled]="disabled"
+           [(ngModel)]="value"
+           (input)="_handleInput($event.target.value)"
+           [style.width.px]="size.clientWidth+5"
+           [style.maxWidth]="'100%'"
+    >
+</ng-container>

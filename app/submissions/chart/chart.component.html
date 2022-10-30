@@ -1,0 +1,52 @@
+<div *ngIf="question" [ngSwitch]="type" class="chart-container">
+    <div class="legend-compensation" *ngSwitchCase="charts.Pie">
+        <ngx-charts-pie-chart
+            [results]="data|serializer:question"
+            [scheme]="colorScheme"
+            [legend]="true"
+            legendTitle=""
+            legendPosition="below">
+            <ng-template #tooltipTemplate let-model="model">
+                <span class="tooltip-name">{{model.name}}</span><br>
+                <span class="tooltip-value">{{model.value}}&nbsp;&#8226;&nbsp;{{model.extra.percent}}%</span>
+            </ng-template>
+        </ngx-charts-pie-chart>
+    </div>
+    <div style="height:100%" *ngSwitchCase="charts.Star">
+        <div style="height: 64px; display: flex; align-items: center;">
+            <app-star-average [average]="data|serializer:question|starAverage" [question]="question"></app-star-average>
+        </div>
+        <div style="height: calc(100% - 64px)">
+            <ngx-charts-bar-horizontal
+                [results]="data|serializer:question"
+                [scheme]="starColorScheme"
+                [legend]="false"
+                [noBarWhenZero]="false"
+                [yAxis]="true"
+                [yAxisTickFormatting]="starAxisTickFormatting"
+                [barPadding]="4"
+                >
+                <ng-template #tooltipTemplate let-model="model">
+                    <span class="tooltip-value">{{model.value}}&nbsp;&#8226;&nbsp;{{model.extra.percent}}%</span>
+                </ng-template>
+            </ngx-charts-bar-horizontal>
+        </div>
+    </div>
+    <div class="legend-compensation" *ngSwitchCase="charts.VBar">
+        <ngx-charts-bar-vertical
+            [results]="data|serializer:question"
+            [scheme]="colorScheme"
+            [legend]="true"
+            legendTitle=""
+            legendPosition="below"
+            [noBarWhenZero]="false"
+            [xAxis]="true">
+            <ng-template #tooltipTemplate let-model="model">
+                <span class="tooltip-name">{{model.name}}</span><br>
+                <span class="tooltip-value">{{model.value}}&nbsp;&#8226;&nbsp;{{model.extra.percent}}%</span>
+            </ng-template>
+        </ngx-charts-bar-vertical>
+    </div>
+    <app-list-chart [answers]="data" *ngSwitchCase="charts.List"></app-list-chart>
+    <app-line-chart [answers]="data" [question]="question" *ngSwitchCase="charts.Line"></app-line-chart>
+</div>

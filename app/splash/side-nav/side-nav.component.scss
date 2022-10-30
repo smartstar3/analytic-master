@@ -1,0 +1,23 @@
+.sidenav-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 100%;
+  z-index: 2;
+}
+
+.sidenav-div {
+  width: min-content;
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+}
+
+mat-toolbar a {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}

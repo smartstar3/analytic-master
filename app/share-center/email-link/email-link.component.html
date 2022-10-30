@@ -1,0 +1,247 @@
+<mat-card class="share-center__item">
+    <h4 mat-subheader>Share Link By Email</h4>
+
+    <div class="email-add-section">
+        <div class="email-add-item">
+            <div class="email-add-item__header">
+                <mat-icon>star</mat-icon>
+                <span class="item-title"> Enter Spreadsheet URL of people to invite</span>
+            </div>
+            <div class="email-add-item__body">
+                <input class="input-csv-url"
+                       type="text"
+                       [(ngModel)]="userCSVUrl"
+                       placeholder="https://docs.google.com/spreadsheets/d/14a6Q88p54k-slbMLJ3oclgIRZNBvMeEWq92sr7aD7r4"/>
+                <button
+                        class="fetch-url-btn"
+                        mat-raised-button
+                        color="primary"
+                        (click)="onFetchUserInfoFromUrl()"
+                        [disabled]="userCSVUrl.length === 0"
+                >
+                    <fa-icon *ngIf="loadingFileByUrl" [icon]="faSpinner" pulse="true"></fa-icon>
+                    <span *ngIf="!loadingFileByUrl">Confirm</span>
+                </button>
+            </div>
+            <div class="email-add-item__description">
+                <span class="item-info">
+                    <mat-icon color="primary">info</mat-icon>
+                    You can check the file format. &nbsp;
+                    <span><a target="_blank" href="https://docs.google.com/spreadsheets/d/14a6Q88p54k-slbMLJ3oclgIRZNBvMeEWq92sr7aD7r4">here</a></span>
+                </span>
+            </div>
+        </div>
+        <div class="email-add-item">
+            <div class="email-add-item__header">
+                <mat-icon>star</mat-icon>
+                <span class="item-title"> Or upload a file from your pc</span>
+            </div>
+            <div class="email-add-item__body">
+                <div class="import-csv-wrapper">
+                    <input
+                        type="file"
+                        #fileInput
+                        (change)="onFileChange($event)"
+                        class="file-input"
+                        accept=".xlsx, .csv"
+                    />
+                    <button mat-raised-button color="primary" (click)="onImportFile()">
+                        Import CSV or Excel file
+                    </button>
+                </div>
+            </div>
+            <div class="email-add-item__description">
+                <span class="item-info">
+                    <mat-icon color="primary">info</mat-icon>
+                    You can check the file format. &nbsp;
+                    <span><a target="_blank" href="https://drive.google.com/uc?id=1CSJMyaTGIk4MFx_RDshmVdWoLCc_u_JR&export=download">here</a></span>
+                </span>
+            </div>
+        </div>
+        <div class="email-add-item">
+            <div class="email-add-item__header">
+                <mat-icon>star</mat-icon>
+                <span class="item-title"> Or enter the name and email manually</span>
+            </div>
+            <div class="email-add-item__body">
+                <form
+                    class="manual-email-input"
+                    fxLayout="row" fxLayoutGap="16px"
+                    [formGroup]="manualForm" (ngSubmit)="onManualForm(manualForm.value)"
+                >
+                    <mat-form-field>
+                        <input matInput type="text" placeholder="Name" formControlName="name"/>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="email" placeholder="Email" formControlName="email"/>
+                    </mat-form-field>
+
+                    <button
+                        class="input-confirm-btn"
+                        mat-raised-button
+                        color="primary"
+                        type="submit"
+                        [disabled]="!manualForm.valid"
+                    >
+                        Confirm
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <mat-chip-list class="email-list-section" *ngIf="shareInfos.length > 0">
+        <mat-chip *ngFor="let shareInfo of shareInfos; index as i"
+                  color="primary" selected
+                  [matTooltip]="shareInfo.name"
+                  [removable]="true" (removed)="removeShareInfo(i)">
+            {{shareInfo.email}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+
+    <div class="subject-section">
+        <div class="subject__header">
+            <span class="subject__title">Subject</span>
+        </div>
+        <div class="subject__input-wrapper">
+            <input
+                class="subject-input"
+                type="text"
+                [(ngModel)]="emailSubject"
+                placeholder="Input Email Subject."
+            />
+        </div>
+    </div>
+
+    <div class="answer-btn-section">
+        <div class="answer-btn-text-container">
+            <div class="answer-btn__header">
+                <span class="answer-btn__title">Answer Button Text</span>
+            </div>
+            <div class="answer-btn__input-wrapper">
+                <input
+                    class="answer-btn-input"
+                    type="text"
+                    [(ngModel)]="answerBtnText"
+                    placeholder="Input answer button content"
+                />
+
+            </div>
+        </div>
+
+        <div class="answer-btn-color-container">
+            <div class="answer-btn__header">
+                <span class="answer-btn__title">Color</span>
+            </div>
+            <div class="answer-btn__input-wrapper">
+                <input
+                    class="answer-btn-input color-input"
+                    readonly
+                    [(colorPicker)]="answerBtnColor"
+                    [style.background]="answerBtnColor"
+                    cpOutputFormat="hex"
+                />
+            </div>
+        </div>
+
+        <div class="answer-btn-color-container">
+            <div class="answer-btn__header">
+                <span class="answer-btn__title">Text Color</span>
+            </div>
+            <div class="answer-btn__input-wrapper">
+                <input
+                        class="answer-btn-input color-input"
+                        readonly
+                        [(colorPicker)]="answerBtnTextColor"
+                        [style.background]="answerBtnTextColor"
+                        cpOutputFormat="hex"
+                />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="message-section">
+        <div class="message__header">
+            <span class="message__title">Message</span>
+
+            <button
+                class="add-variable-btn mat-light-theme-green"
+                mat-icon-button
+                color="primary"
+                [matMenuTriggerFor]="appMenu"
+                matTooltip="Add variable"
+            >
+                <mat-icon>add</mat-icon>
+            </button>
+            <mat-menu #appMenu="matMenu">
+                <button
+                    *ngFor="let variable of emailVariableFields"
+                    mat-menu-item
+                    (click)="addEmailVariable(variable)"
+                >
+                    {{ variable }}
+                </button>
+            </mat-menu>
+
+            <button
+                class="toggle-view-btn mat-light-theme-green"
+                mat-icon-button
+                color="primary"
+                (click)="toggleEmailViewMode()"
+                [matTooltip]="emailPreviewMode ? 'Edit': 'Preview'"
+            >
+                <mat-icon>{{ emailPreviewMode ? 'edit' : 'visibility' }}</mat-icon>
+            </button>
+        </div>
+        <quill-editor *ngIf="!emailPreviewMode"
+                      [(ngModel)]="emailTemplate"
+                      [styles]="{height: '200px'}"
+                      [modules]="messageFormModules">
+        </quill-editor>
+        <div *ngIf="emailPreviewMode"
+             class="preview-box"
+             cdkDropList
+             (cdkDropListDropped)="onButtonDrop($event)"
+        >
+            <div *ngIf="companyLogo" class="company-logo-container">
+                <img *ngIf="companyLogo" class="company-logo" src="{{companyLogoLink}}" name="{{companyLogo?.hash}}" />
+            </div>
+
+            <ng-container *ngFor="let item of dragItems">
+                <div *ngIf="item.type === 'paragraph'" [innerHTML]="item.content" cdkDrag class="message-paragraph" [cdkDragDisabled]="true"></div>
+                <div *ngIf="item.type === 'button'" class="redirect-button-container">
+                    <button cdkDrag mat-raised-button [style.background]="answerBtnColor" [style.color]="answerBtnTextColor">
+                        {{answerBtnText}}
+                    </button>
+                </div>
+            </ng-container>
+
+        </div>
+        <div class="message__description">
+            <div class="message__wrapper">
+                <span class="message__icon"><mat-icon color="primary">info</mat-icon></span>
+                <span class="message__info">You can add variables by clicking the + icon directly above the editor. For example: If you add #firstname# in your email, then that part of the email is replaced with the user's first name once the email is sent.</span>
+            </div>
+            <div class="message__wrapper">
+                <span class="message__icon"><mat-icon color="primary">info</mat-icon></span>
+                <span class="message__info">You can preview your email by clicking the <mat-icon>visibility</mat-icon> icon.</span>
+            </div>
+            <div class="message__wrapper">
+                <span class="message__icon"><mat-icon color="primary">info</mat-icon></span>
+                <span class="message__info">You can change answer button position in preview mode.</span>
+            </div>
+        </div>
+    </div>
+
+    <button mat-stroked-button color="primary" class="share-btn"
+            disabled="{{isLoading?'true':'false'}}"
+            (click)="onShareFormLink()"
+    >
+        <span class="share-btn__title">
+            Send &nbsp;&nbsp;
+            <mat-icon>send</mat-icon>
+        </span>
+    </button>
+</mat-card>

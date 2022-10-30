@@ -1,0 +1,24 @@
+<ng-container *ngIf="submission && (is.init|async)">
+    <div class="submissions">
+        <div class="answer-list">
+            <mat-card *ngFor="let answer of submission.answers; let i = index;">
+                <mat-card-title>{{qs.get[answer.question].conf.description|stringifyDescription:submissionEnv}}</mat-card-title>
+                <app-question  [answer]="answer.answer" [qid]="answer.question" [disabled]="true"></app-question>
+            </mat-card>
+            <app-end-screen *ngIf="es.get && submission.end !== undefined &&  submission.end !== null" [eid]="submission.end" [index]="submission.end" [disabled]="true"></app-end-screen>
+        </div>
+        <div class="share-info" *ngIf="submission.share">
+            <mat-card class="user-info">
+                <h3 class="user-info__title">User Information</h3>
+                <div class="user-info-item">
+                    <span class="user-info-item__title">Name</span>
+                    <span class="user-info-item__content">{{submission.share.name}}</span>
+                </div>
+                <div class="user-info-item">
+                    <span class="user-info-item__title">Email</span>
+                    <span class="user-info-item__content">{{submission.share.email}}</span>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</ng-container>

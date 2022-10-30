@@ -1,0 +1,168 @@
+.background {
+  width: 100%;
+  height: 100%;
+}
+
+.midden {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+mat-card {
+  overflow-wrap: break-word;
+  width: 80%;
+  text-align: center;
+  mat-card-content {
+    margin-top: 24px;
+  }
+  mat-card-actions {
+    margin-top: 0;
+    margin-right: 0;
+  }
+}
+
+mat-card:nth-last-child(1) {
+  margin-top: 0;
+}
+
+.fake-button {
+  visibility: hidden;
+}
+
+// Animations mobile
+
+#phase1 {
+  animation: phase1 1s 0.7s ease both;
+}
+
+#phase2 {
+  position: fixed;
+  animation: mobile_phase2 0.8s 0.7s ease-out both;
+}
+
+#phase3 {
+  position: fixed;
+  animation: mobile_phase3 0.6s 0.7s ease-out both;
+}
+
+.start-end-screen {
+  width: 100%;
+  height: 100%;
+  animation: phase1 1s 0.7s ease both;
+}
+
+// RESPONSIVENESS
+
+@media only screen and (min-width: 600px) {
+  mat-card {
+    width: 60%;
+  }
+
+  .image-container {
+    width: 60%;
+  }
+
+  #phase2 {
+    position: fixed;
+    animation: pc_phase2 1s 0.7s ease-out both;
+  }
+
+  #phase3 {
+    position: fixed;
+    animation: pc_phase3 1s 0.7s ease-out both;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  mat-card {
+    width: 40%;
+  }
+
+  .image-container {
+    width: 40%;
+  }
+}
+
+
+// KEYFRAMES
+
+@keyframes phase1 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pc_phase2 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+    transform: translateY(calc(-100% + -4em));
+  }
+}
+
+@keyframes pc_phase3 {
+  from {
+    opacity: 0.4;
+    transform: translateY(calc(-100% + -4em));
+  }
+  to {
+    opacity: 0;
+    transform: translateY(calc(-200% + -8em));
+  }
+}
+
+@keyframes mobile_phase2 {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(calc(-100% + -2.5em));
+  }
+}
+
+@keyframes mobile_phase3 {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-100% + -2.5em));  }
+  to {
+    opacity: 0;
+    transform: translateY(calc(-200% + -5em));
+  }
+}
+
+.container {
+  height: 10%;
+  width: 250px;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+}
+
+.bar {
+  width: 20%;
+  margin: 0 auto;
+  min-width: 120px;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: #1e457c;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: #e4e8eb;
+}
+
+::ng-deep .mat-progress-bar {
+  border-radius: 2px;
+}

@@ -1,0 +1,67 @@
+//@import url("");
+
+.content {
+  margin-top: 1em;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr 400px 400px 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas:
+          //'. cancelled cancelled .'
+          '. stats actions .'
+          '. table table .';
+}
+
+h6 {
+  margin-bottom: 0;
+}
+
+.stats {
+  grid-area: stats;
+}
+
+.details {
+  grid-area: details;
+}
+
+.table {
+  grid-area: table;
+}
+
+.cancelled {
+  height: min-content;
+  grid-area: cancelled;
+}
+
+.actions {
+  height: min-content;
+  grid-area: actions;
+  .action-header {
+    margin-bottom: 1.3em;
+  }
+
+  .action-buttons {
+    margin-bottom: 0 !important;
+    button:first-child {
+      margin-left: 0.55em !important;
+      margin-right: 8px !important;
+    }
+  }
+}
+
+.limits {
+  margin: 1em 1em 0 1em !important;
+}
+
+.prog {
+  width: 100%;
+  margin: 0.25em 0;
+}
+
+.info-content {
+  padding: 1.3em 1em 0;
+  text-align: justify;
+  //text-justify: inter-word;
+}

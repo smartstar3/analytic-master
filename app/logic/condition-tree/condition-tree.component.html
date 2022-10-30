@@ -1,0 +1,64 @@
+<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-leaf tree-node">
+        <div class="header-row">
+            <button mat-icon-button [attr.aria-label]="'toggle combination'" cdkTreeNodeToggle [cdkTreeNodeToggleRecursive]="true">
+                <mat-icon>
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+            </button>
+            <ng-container *ngIf="err.get(node.path).flatChange|async as errState">
+                <mat-icon [class.invisible]="!errState.error || errState.error.length === 0" color="warn" style="margin-right: 8px">error</mat-icon>
+            </ng-container>
+            <button class="header-title" mat-button [matMenuTriggerFor]="typeMenu">[{{node.type | uppercase}}]</button>
+            <mat-menu #typeMenu="matMenu">
+                <button mat-menu-item *ngIf="node.type !== 'and'" (click)="tree.split(node,'and')">[AND]</button>
+                <button mat-menu-item *ngIf="node.type !== 'or'" (click)="tree.split(node, 'or')">[OR]</button>
+            </mat-menu>
+            <div class="header-title">{{node.data | async | stringifyCondition}}</div>
+
+            <span class="spacing"></span>
+            <button mat-icon-button [class.invisible]="node.isRoot" (click)="tree.delete(node)"><mat-icon>remove</mat-icon></button>
+        </div>
+        <div class="node-body" [class.invisible]="!treeControl.isExpanded(node)">
+            <app-logic-comparison [(ngModel)]="node.condition" [path]="node.path"></app-logic-comparison>
+        </div>
+        <div class="add" *ngIf="node.isRoot" [class.invisible]="!treeControl.isExpanded(node)">
+            <button mat-icon-button (click)="tree.addChild(node, 'check', 'or')"><mat-icon>add</mat-icon></button>
+            <span class="add-text">Add condition...</span>
+        </div>
+    </cdk-nested-tree-node>
+
+    <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="tree-node">
+        <div class="header-row">
+            <button mat-icon-button [attr.aria-label]="'toggle combination'" cdkTreeNodeToggle [cdkTreeNodeToggleRecursive]="true">
+                <mat-icon>
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+            </button>
+            <ng-container *ngIf="err.get(node.path).flatChange|async as errState">
+                <mat-icon *ngIf="errState.error?.length > 0" color="warn">error</mat-icon>
+            </ng-container>
+            <button class="header-title" mat-button [matMenuTriggerFor]="typeMenu">[{{node.type | uppercase}}]</button>
+            <mat-menu #typeMenu="matMenu">
+                <button mat-menu-item *ngIf="node.type !== 'and'" (click)="node.setType('and')">[AND]</button>
+                <button mat-menu-item *ngIf="node.type !== 'or'" (click)="node.setType('or')">[OR]</button>
+            </mat-menu>
+
+            <span class="spacing"></span>
+
+            <button mat-icon-button [class.invisible]="node.isRoot" (click)="tree.delete(node)"><mat-icon>remove</mat-icon></button>
+        </div>
+        <div class="node-body" [class.invisible]="!treeControl.isExpanded(node)">
+            <ng-container cdkTreeNodeOutlet></ng-container>
+            <div class="add">
+                <button mat-icon-button [matMenuTriggerFor]="addChildMenu"><mat-icon>add</mat-icon></button>
+                <span class="add-text">Add condition...</span>
+            </div>
+        </div>
+        <mat-menu #addChildMenu="matMenu">
+            <button mat-menu-item (click)="tree.addChild(node, 'check')">Check</button>
+            <button mat-menu-item *ngIf="node.type !== 'and'" (click)="tree.addChild(node, 'and')">And</button>
+            <button mat-menu-item *ngIf="node.type !== 'or'" (click)="tree.addChild(node, 'or')">Or</button>
+        </mat-menu>
+    </cdk-nested-tree-node>
+</cdk-tree>

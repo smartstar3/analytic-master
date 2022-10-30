@@ -1,0 +1,32 @@
+<ng-container>
+    <button class="addJumps" (click)="addJump()" *ngIf="qs.get[sel.id]?.conf.jumps.length === 0" mat-stroked-button color="primary" [disabled]="false">Add Logic Jump</button>
+    <mat-expansion-panel expanded="true" *ngIf="qs.get[sel.id]?.conf.jumps.length > 0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Logic</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let jump of qs.get[sel.id]?.conf.jumps; index as i; last as last">
+            <logic-condition-tree [path]="'questions.'+this.sel.id+'.jumps.'+i" [condition]="jump.condition" (conditionChange)="conditionChange($event, i)"></logic-condition-tree>
+            <div class="logic-jump-container">
+                <span class="then">[THEN]</span>
+                <mat-form-field class="then-selector">
+                    <mat-select [ngModel]="jump.then" (ngModelChange)="thenChange($event, i)">
+                        <mat-optgroup *ngIf="(qs.order|async).length > 0" label="Questions">
+                            <mat-option *ngIf="!pos.exists(jump.then) && qs.get[jump.then]" [value]="jump.then" disabled>Q. [DELETED]</mat-option>
+                            <mat-option *ngFor="let qid of (qs.order|async); let i = index" [value]="qid">Q{{ i+1 }}. {{ds.descriptions[qid]}}</mat-option>
+                        </mat-optgroup>
+                        <mat-optgroup *ngIf="((es.order|async).length > 0) && es.endEnabled" label="End Screen">
+                            <mat-option *ngIf="!pos.exists(jump.then) && es.get[jump.then]" [value]="jump.then" disabled>E. [DELETED]</mat-option>
+                            <mat-option *ngFor="let eid of (es.order|async); let i = index" [value]="eid">E{{ i+1 }}. {{es.get[eid].title}}</mat-option>
+                        </mat-optgroup>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="add-container mat-light-theme-green">
+                <span class="spacing"></span>
+                <button mat-icon-button (click)="addJump(i)" color="primary"><mat-icon>add</mat-icon></button>
+                <button mat-icon-button (click)="removeJump(i)" color="warn"><mat-icon>clear</mat-icon></button>
+            </div>
+            <mat-divider *ngIf="!last"></mat-divider>
+        </div>
+    </mat-expansion-panel>
+</ng-container>

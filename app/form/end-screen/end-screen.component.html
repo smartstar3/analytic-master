@@ -1,0 +1,25 @@
+<div class="main">
+    <div *ngIf="screen.imageEnabled && image" class="image-container">
+        <app-scalable-image
+          *ngIf="image"
+          [image]="image"
+          [imageLink]="imageLink"
+          [imageScale]="screen?.image?.scale"
+          [isEditAble]="true"
+          (updateImageScale)="updateImageScale($event)"
+        ></app-scalable-image>
+    </div>
+    <mat-card *ngIf="screen" class="flex-me" [ngStyle]="{'background': designForm.card} ">
+        <div [ngStyle]="fontStyle().getStyles()">
+            <mat-card-title [ngStyle]="{'color' : designForm.question} ">E{{index + 1}}. {{screen.title}}</mat-card-title>
+            <mat-card-content [ngStyle]="{'color' : designForm.answer}">{{screen.body}}</mat-card-content>
+            <a *ngIf="(screen.linkEnabled === undefined || screen.linkEnabled === true) && screen.link" [href]="screen.link.url" (click)="disable($event)" target="_blank">
+                <button mat-raised-button [disabled]="disabled"
+                        [ngStyle]="{'color' : designForm.question, 'background' : designForm.button}">
+                    {{screen.link.button}}
+                </button>
+            </a>
+        </div>
+    </mat-card>
+</div>
+

@@ -1,0 +1,15 @@
+<div class="sidenav-container">
+    <div class='sidenav-div'>
+        <ng-container *ngFor="let page of pages">
+            <a mat-button *ngIf="!router.isActive(page, true)" color="primary" class="nav-links"
+               routerLink="/{{page}}" (click)="drawer.toggle()">
+                <mat-icon>{{icons[page]}}</mat-icon>
+                {{" " + page | uppercase}} </a>
+            <a mat-flat-button *ngIf="router.isActive(page, true)" color="primary" class="nav-links"
+               routerLink="/{{page}}" (click)="drawer.toggle()">
+                <mat-icon>{{icons[page]}}</mat-icon>
+                {{" " + page | uppercase}} </a>
+        </ng-container>
+    </div>
+
+</div>

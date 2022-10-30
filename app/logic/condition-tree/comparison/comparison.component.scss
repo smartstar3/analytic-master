@@ -1,0 +1,30 @@
+:host {
+  .top-row,
+  .bottom-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    * {
+      flex-grow: 1;
+    }
+  }
+
+  .top-row {
+    .negate {
+      max-width: 64px;
+      min-width: 52px;
+    }
+  }
+
+  .bottom-row {
+    .num-ops {
+      max-width: 54px;
+      min-width: 42px;
+    }
+  }
+
+  .padding {
+    flex-basis: 12px;
+    flex-grow: 0 !important;
+  }
+}

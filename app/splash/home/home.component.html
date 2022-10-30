@@ -1,0 +1,105 @@
+<section class="header">
+    <div class="introduction">
+        <div class="intro-text">
+            <span class="stripe"></span>
+            <span class="mainTitle">Collecting feedback has never been easier</span>
+            <span class="subTitle">Our goal is to easily collect and analyse feedback as if you were on autopilot</span>
+        </div>
+        <div class="cta">
+            <button mat-flat-button class="cta-button" routerLink="/register">Start collecting today</button>
+        </div>
+    </div>
+        <div class="cover">
+            <div class="image"></div>
+        </div>
+</section>
+
+<section class="trustBadges">
+        <div class="logo-text">
+            <span class="logoTitle">YOU'RE IN GOOD COMPANY</span>
+        </div>
+        <div class="logo">
+            <img class="abc" src="/assets/img/homepage2/abc.png" alt="ABC logo" />
+            <img class="fox" src="/assets/img/homepage2/1fox.svg" alt="FOX logo" />
+            <img class="cbs" src="/assets/img/homepage2/cbs.png" alt="CBS logo" />
+            <img class="nbc" src="/assets/img/homepage2/nbc.png" alt="NBC logo" />
+        </div>
+</section>
+
+<section class="howDoesItWork">
+    <div class="howPage">
+        <div class="howTitle">
+            <span class="whiteTitle title">How does it work</span>
+        </div>
+        <div class="mat-cards">
+            <mat-card class="card1">
+                <mat-card-title>
+                    <img class="vector" src="/assets/img/homepage2/Vector%20Smart%20Object-3.png" alt="ABC logo" />
+                </mat-card-title>
+                <mat-card-subtitle><span class="number">1.</span> Build your form</mat-card-subtitle>
+                <mat-card-content>By using our form builder you can make the perfect form in under 5 minutes.</mat-card-content>
+            </mat-card>
+            <mat-card class="card2">
+                <mat-card-title>
+                    <img class="vector" src="/assets/img/homepage2/Vector%20Smart%20Object.png" alt="ABC logo" />
+                </mat-card-title>
+                <mat-card-subtitle><span class="number">2.</span> Send it to your clients / customers</mat-card-subtitle>
+                <mat-card-content>You can send it with your own channels by using e-mail, WhatsApp, and/or SMS.</mat-card-content>
+            </mat-card>
+            <mat-card class="card3">
+                <mat-card-title>
+                    <img class="vector" src="/assets/img/homepage2/Vector%20Smart%20Object-2.png" alt="ABC logo" />
+                </mat-card-title>
+                <mat-card-subtitle><span class="number">3.</span> Obtain feedback & positive reviews</mat-card-subtitle>
+                <mat-card-content>By using logic jumps satisfied customers can be sent directly to the review platform you use. Dissatisfied customers can also be handled directly.</mat-card-content>
+            </mat-card>
+            <mat-card class="card4">
+                <mat-card-title>
+                    <img class="vector" src="/assets/img/homepage2/Vector%20Smart%20Object-1.png" alt="ABC logo" />
+                </mat-card-title>
+                <mat-card-subtitle><span class="number">4.</span> Analyse your feedback</mat-card-subtitle>
+                <mat-card-content>With our tools, you can easily and quickly filter all your feedback by selecting the questions and/or answers you want to analyse.</mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</section>
+
+<section class="choosePlan">
+    <div class="choosePlanLayout">
+        <div class="choosePlanTitle">
+            <span class="blueTitle title">Choose a plan</span>
+        </div>
+        <div class="choosePlanRow non-reverse">
+            <div class="choosePlanText">
+                <span class="planTitle">Personal</span>
+                <span class="planSubtitle">Includes unlimited use of all the same powerful tools of the business package that we offer. Tailored for small business owners, solopreneurs and students.</span>
+                <button class="cta-button" mat-flat-button routerLink="/pricing" [queryParams]="{ tab: 1 }">AVAILABLE PLANS</button>
+            </div>
+            <div class="planImageContainer">
+                <img class="planImage" src="/assets/img/homepage2/Layer%204.png" alt="Personal plan" />
+            </div>
+
+        </div>
+        <div class="choosePlanRow reverse">
+            <div class="planImageContainer">
+                <img class="planImage" src="/assets/img/homepage2/Layer%205.png" alt="Business plan" />
+            </div>
+
+
+            <div class="choosePlanText">
+                <span class="planTitle">Business</span>
+                <span class="planSubtitle">Redirect happy customers to your review platform, or find the dissatisfied customers preemptively. Filter through received feedback to target specific groups is also possible.</span>
+                <button class="cta-button" mat-flat-button routerLink="/pricing" [queryParams]="{ tab: 0 }">AVAILABLE PLANS</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-get-started></app-get-started>
+
+
+
+
+
+
+

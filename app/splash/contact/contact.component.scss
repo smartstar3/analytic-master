@@ -1,0 +1,160 @@
+body,
+.header {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat';
+}
+
+////////////////////////////////////////////////////////////////////
+/////////////////////HEADER////////////////////////////////////////
+
+.header {
+  min-height: 40vh;
+  height: 40vh;
+  width: 100%;
+  background-color: #224596;
+  display: flex;
+  overflow: hidden;
+}
+
+.headerImage {
+  display: flex;
+  height: 100%;
+  flex: 1;
+}
+
+.img {
+  display: block;
+  height: 95%;
+  margin: auto 0 0 auto;
+  animation: translateLeftContact 1.5s ease;
+}
+
+@keyframes translateLeftContact {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+////////////////////////////////////////////////////////////////////
+/////////////////////SECTION2//////////////////////////////////////////
+
+.section2 {
+  transform: translateY(calc(-16vh - 3em));
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+  //onderste css verwijderen als de agenda erbij komt. Is nu om de footer goed te hebben
+  height: 40vh;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 300px;
+  transform: translateX(10px);
+}
+
+.title {
+  font-size: 3em;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+}
+
+.subTitle {
+  color: white;
+  font-size: 1em;
+  font-weight: 500;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+}
+
+mat-card {
+  margin: 3em 15px 0 15px;
+  width: 500px;
+  .icon_title {
+    height: 5vh;
+    margin: 1vh auto;
+  }
+  mat-card-subtitle {
+    font-size: 1.25em;
+    font-weight: 800;
+    color: black;
+  }
+  mat-card-content {
+    font-size: 1.1em;
+  }
+}
+
+.blue {
+  color: #1678c6;
+}
+
+.white {
+  color: white;
+}
+
+.test {
+  height: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  .section2 {
+    width: 100%;
+  }
+  .cards {
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .img {
+    opacity: 60%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .header {
+    min-height: 30vh;
+    height: 30vh;
+  }
+  .headerText {
+    width: 90%;
+    margin: auto;
+  }
+  .title {
+    font-size: 2em;
+  }
+  .img {
+    opacity: 30%;
+  }
+
+  mat-card {
+    width: 90%;
+    min-width: 300px;
+    margin: 20px auto;
+    mat-card-title {
+      text-align: center;
+    }
+    .icon_title {
+      height: 4vh;
+    }
+    mat-card-subtitle {
+      font-size: 1.2em;
+      text-align: center;
+    }
+    mat-card-content {
+      font-size: 1em;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<div *ngIf="!company; else elseCase">
+    <span>Getting your payment info...</span>
+    <mat-spinner></mat-spinner>
+</div>
+<ng-template #elseCase>
+    <div *ngIf="company.plan === 'free'; else notFree">
+        <span>Something went wrong with your payment. please contact support if your plan was not activated!</span>
+    </div>
+    <ng-template #notFree>
+        <span> Welcome to the Feedback-analytics <span class="primary">{{company.plan}}</span> plan!</span>
+    </ng-template>
+</ng-template>

@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Change Share Link</h1>
+<div mat-dialog-content>
+    <p *ngIf="currentLink">WARNING: Previously shared form links will become invalid! </p>
+    <p *ngIf="!currentLink">Please add your first link</p>
+
+    <div fxLayout="column">
+        <p class="my-mat-hint">Preview</p>
+        <p>
+            <a href="/dash/settings" target="_blank" (click)="disable($event)" >{{prefix}}<b>{{this.newLink.value || "please enter a value"}}</b>{{this.suffix}}</a>
+        </p>
+    </div>
+    <form [formGroup]="changeCompanyLinkForm">
+        <mat-form-field style="width: 100%">
+            <input matInput type="text" placeholder="New Share Link" formControlName="newCompanyLink" required>
+            <mat-hint align="end" class="accept" *ngIf="newLink.valid">Link is <b>available</b></mat-hint>
+            <mat-error *ngIf="newLink.errors && newLink.errors.required">Input is <b>required</b></mat-error>
+            <mat-error *ngIf="newLink.errors && !newLink.errors.required && newLink.errors.minlength">Min <b>3</b> characters</mat-error>
+            <mat-error *ngIf="newLink.errors && !newLink.errors.required && !newLink.errors.minlength && newLink.errors.pattern">Can only contain <b>lower case characters(no spaces)</b> and <b>numbers</b></mat-error>
+            <mat-error *ngIf="newLink.errors && newLink.errors.taken">This link is <b>already taken</b></mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+            <input matInput type="text" placeholder="Confirm Share Link" formControlName="retypedCompanyLink" required>
+            <mat-hint align="end" class="accept" *ngIf="confirmLink.valid">Share link <b>confirmed</b></mat-hint>
+            <mat-error *ngIf="confirmLink.errors && confirmLink.errors.required">Input is <b>required</b></mat-error>
+            <mat-error *ngIf="confirmLink.errors && !confirmLink.errors.required && confirmLink.errors.confirm">Links are not <b>equal</b></mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions style="justify-content: space-between">
+    <button type="Button" mat-stroked-button (click)="noClick()" style="flex: auto; margin-right: 24px">Cancel</button>
+    <button type="Button" mat-flat-button color="primary" (click)="saveCompanyLink()" [disabled]="!changeCompanyLinkForm.valid" style="flex: auto">Save</button>
+</div>

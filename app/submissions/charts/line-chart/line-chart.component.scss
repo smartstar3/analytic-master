@@ -1,0 +1,29 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
+mat-form-field {
+  position: relative;
+  bottom: 0;
+}
+
+.line-chart-container {
+  height: calc(100% - (65px + 36px));
+  width: 100%;
+}
+
+.option-container {
+  margin-top: 44px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > * {
+    width: calc(100% / 3);
+  }
+  mat-checkbox {
+    padding-left: 24px;
+  }
+}

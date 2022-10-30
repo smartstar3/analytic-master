@@ -1,0 +1,123 @@
+:host {
+  width: 100vw;
+
+  app-visualization {
+    width: 440px;
+    justify-self: center;
+  }
+
+  mat-toolbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    border-radius: 0 0 2px 2px;
+    box-shadow: inherit;
+
+    .spacing {
+      flex: auto 1 1;
+    }
+
+    .filter-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.75);
+      margin-right: 12px;
+      max-width: 256px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .center-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-25%);
+      width: 640px;
+      display: flex;
+      align-items: center;
+
+      mat-tab-group {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .loading {
+    width: 100vw;
+    height: calc(100vh - 64px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  mat-drawer-container {
+    width: 100vw;
+    height: calc(100vh - 64px);
+  }
+
+  .submission-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .visualization-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    gap: 32px;
+    grid-gap: 32px;
+    padding: 32px;
+  }
+
+  .filters-sidebar {
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    .add {
+      width: 320px;
+      display: flex;
+      align-items: center;
+      padding: 12px 12px 0;
+      box-sizing: border-box;
+
+      .add-text {
+        color: #7e7e7e;
+      }
+    }
+    .selected {
+      background-color: #f6f6f6;
+    }
+    .filter-option {
+      display: flex;
+      align-items: center;
+      width: 288px;
+      .filter-text {
+        max-width: 256px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .spacing {
+        min-width: 12px;
+      }
+    }
+  }
+
+  .submissions-sidebar {
+    width: 320px;
+
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.spacing {
+  flex-grow: 1;
+}
+
+.transparent {
+  color: transparent;
+}

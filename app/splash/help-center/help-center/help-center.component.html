@@ -1,0 +1,35 @@
+<section class="header">
+    <div class="text">
+        <div class="textBox">
+            <div class="title">Hi, how can we help?</div>
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon>search</mat-icon>
+                        Search any topics here</mat-label>
+                      <input matInput placeholder="Placeholder" [(ngModel)]="searchTerm">
+                </mat-form-field>
+        </div>
+    </div>
+    <div class="image">
+        <img class="triangle" src="/assets/img/help-center/rectangle.svg" alt="rectangle" />
+        <img class="background" src="/assets/img/help-center/background.png" alt="helpcenter" />
+    </div>
+</section>
+
+<section class="cards">
+    <div class="container">
+        <div *ngFor="let card of cards | search: searchTerm" class="flex-item">
+            <mat-card>
+                <mat-card-title>
+                    <img class="cardIcon" src="{{card.icon}}" alt="helpcenter" />
+                </mat-card-title>
+                <mat-card-subtitle>{{card.title}}</mat-card-subtitle>
+                <mat-card-content>{{card.text}}</mat-card-content>
+                <mat-card-actions> <a href="help-center/{{card.path}}">learn more</a></mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</section>
+
+<app-get-started></app-get-started>
+

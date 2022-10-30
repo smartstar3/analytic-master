@@ -1,0 +1,34 @@
+<ng-container *ngIf="!isTypeAddress()">
+  <mat-table [dataSource]="answers" class="mat-elevation-z8">
+      <ng-container matColumnDef="Answers">
+        <mat-header-cell *matHeaderCellDef> Answers </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.answer}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [class.selected]="row.id === sid.value" (click)="select(row.id)"></mat-row>
+  </mat-table>
+</ng-container>
+<ng-container *ngIf="isTypeAddress()">
+  <mat-table [dataSource]="answers" class="mat-elevation-z8" id="mat-table-address">
+    <ng-container matColumnDef="Cities">
+      <mat-header-cell *matHeaderCellDef > Cities </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="table-cell-address"> {{element.answer.city}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Streets">
+      <mat-header-cell *matHeaderCellDef> Streets </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="table-cell-address"> {{element.answer.street}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="House Numbers">
+      <mat-header-cell *matHeaderCellDef> House <br> Numbers </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="table-cell-address"> {{element.answer.houseNumber}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Postal Codes" class="table-cell-address">
+      <mat-header-cell *matHeaderCellDef> Postal <br> Codes </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.answer.postalCode}} </mat-cell>
+    </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumnsAddress; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsAddress;" [class.selected]="row.id === sid.value" (click)="select(row.id)"></mat-row>
+  </mat-table>
+</ng-container>
+

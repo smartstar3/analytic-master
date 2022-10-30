@@ -1,0 +1,6 @@
+<div class="loading" *ngIf="!loaded">
+  <mat-spinner [diameter]="256" [strokeWidth]="16"></mat-spinner>
+</div>
+<div class="overlay" [ngStyle]="{ background: '#fafafa' }">
+  <app-form *ngIf="loaded" (submitted)="submit($event)"></app-form>
+</div>

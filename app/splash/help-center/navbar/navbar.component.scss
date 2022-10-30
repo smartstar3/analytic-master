@@ -1,0 +1,32 @@
+.menu-button {
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
+}
+.menu-button.rotated {
+  transform: rotate(180deg);
+}
+.sub-item-group {
+  visibility: visible;
+  overflow-y: hidden;
+  max-height: 100px;
+}
+.sub-item-group.hidden {
+  transition: max-height 300ms ease;
+  max-height: 0;
+}
+.sub-item-group.expanded {
+  transition: max-height 300ms ease;
+  max-height: 200px; //height of the sublist
+}
+
+.sub-item {
+  padding-left: 30px !important;
+}
+
+mat-nav-list {
+  padding: 0 !important;
+}
+
+.selected-item {
+  background-color: #e0dede !important;
+}

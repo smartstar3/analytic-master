@@ -1,0 +1,87 @@
+<div class="background" [ngStyle]="{ background: design.background }">
+  <ng-container *ngIf="state === 'starting'">
+    <div class="start-end-screen">
+      <app-answer-start-screen (started)="start()"></app-answer-start-screen>
+    </div>
+  </ng-container>
+
+  <div class="midden" *ngIf="state === 'started'">
+    <mat-card
+      class="from-low-to-mid"
+      id="{{ 'card' + i }}"
+      *ngFor="let q of questionList; let i = index; let last = last; let first = first"
+      [ngStyle]="{ background: design.card }"
+      (keyup.enter)="scrollToNextQuestion()"
+    >
+      <div>
+        <mat-card-title class="title" id="{{ i }}"
+          >{{ qs.get[q].conf.description | stringifyDescription: answers }}
+        </mat-card-title>
+      </div>
+      <div [ngStyle]="fontStyle().getStyles()">
+        <mat-card-content [ngStyle]="{ color: design.answer }">
+          <app-question
+            [disabled]="selectionService.selectedQuestion !== i"
+            [answer]="updater | get: q | async"
+            [qid]="q"
+            (changed)="editAnswerToQuestion(i, q, $event)"
+            (answered)="scrollToNextQuestion()"
+          ></app-question>
+        </mat-card-content>
+      </div>
+      <mat-card-actions [align]="'end'" *ngIf="editable(qs.get[q])">
+        <button
+          mat-stroked-button
+          *ngIf="last || answers.edited(q); else other"
+          [disabled]="!canScrollToNextQuestion()"
+          (click)="scrollToNextQuestion()"
+          [ngStyle]="fontStyle().getStyles() && { background: design.button, color: design.question }"
+        >
+          Next
+        </button>
+        <ng-template #other><button mat-stroked-button class="fake-button">Fake</button></ng-template>
+      </mat-card-actions>
+    </mat-card>
+    <div id="submit-button">
+      <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="state === 'ended' && endScreen !== undefined">
+    <div class="start-end-screen">
+      <app-answer-end-screen [eid]="endScreen"></app-answer-end-screen>
+    </div>
+  </ng-container>
+
+  <div class="progress-div">
+    <div class="progress-content" *ngIf="state === 'started'">
+      <span id="progress-text">{{ progress }}% completed</span>
+      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+      <div class="navigation-buttons-div">
+        <a routerLink="/solutions" target="_blank">
+          <button mat-raised-button id="branding-button" color="primary">
+            <span class="button-text">Powered by <b>Feedback-Analytics</b></span>
+          </button>
+        </a>
+        <button
+          mat-raised-button
+          id="navigation-button"
+          color="primary"
+          (click)="scrollToPreviousQuestion()"
+          [disabled]="!canScrollToPreviousQuestion()"
+        >
+          <mat-icon>expand_less</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          id="navigation-button-2"
+          color="primary"
+          (click)="scrollToNextQuestion()"
+          [disabled]="!canScrollToNextQuestion()"
+        >
+          <mat-icon>expand_more</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

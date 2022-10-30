@@ -1,0 +1,146 @@
+body,
+.header,
+.cards {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat';
+}
+
+/////////////////////////////////////////////////////////////////////
+///////////////////HEADER//////////////////////////////////////////
+
+.header {
+  min-height: 40vh;
+  height: 40vh;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-width: 300px;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2.5em;
+  font-weight: 900;
+}
+
+mat-form-field {
+  z-index: 1000;
+  width: 100%;
+  mat-icon {
+    transform: translateY(3px);
+  }
+}
+
+.image {
+  position: absolute;
+  height: 40vh;
+  min-height: 40vh;
+  width: 100%;
+  overflow: hidden;
+  animation: translatedown 1.6s ease;
+}
+
+.triangle {
+  float: right;
+  height: 30vw;
+  max-height: 100%;
+  transform: translate(10vh, -4vh);
+  z-index: -1;
+}
+
+.background {
+  position: absolute;
+  transform: translateY(10%);
+  right: 100px;
+  max-height: 90%;
+  height: 90%;
+}
+
+@keyframes translatedown {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+@media screen and (max-width: 1650px) {
+  .text {
+    width: 60vw;
+  }
+}
+
+/////////////////////////////////////////////////////////////
+////////////////////////////cards////////////////////////////
+
+.cards {
+  width: 75%;
+  margin: 50px auto;
+}
+
+.container {
+  width: 100%;
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  grid-gap: 15px;
+  padding: 15px;
+}
+
+mat-card {
+  position: relative;
+  width: 280px;
+  height: 240px;
+  mat-card-title {
+    .cardIcon {
+      height: 40px;
+    }
+  }
+  mat-card-subtitle {
+    margin-top: 20px;
+    font-size: 1.1em;
+    font-weight: 900;
+    color: black;
+  }
+  mat-card-actions {
+    color: #224596;
+    position: absolute;
+    bottom: 30px;
+    transform: translateX(8px);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .image {
+    display: none;
+  }
+  .text {
+    margin: auto;
+    width: 90%;
+  }
+
+  .cards {
+    width: 90%;
+    margin-top: 20px;
+  }
+
+  mat-card {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .title {
+    font-size: 2em;
+  }
+}

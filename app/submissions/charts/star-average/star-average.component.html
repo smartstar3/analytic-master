@@ -1,0 +1,25 @@
+<div *ngIf="question">
+    <div class="mat-light-theme-yellow" *ngIf="question.conf.rating === 'star' || question.conf.rating === 'color'">
+        <h2 class="positioning">{{average|number:"1.0-1"}}&nbsp;&nbsp;&nbsp;
+            <h3><mat-icon inline *ngFor="let icon of average|starIcon:question.conf.max" color="primary">{{icon}}</mat-icon></h3>
+        </h2>
+    </div>
+
+<!--    <div *ngIf="question.conf.rating === 'color'">-->
+<!--        <h2 class="positioning">{{average|number:"1.0-1"}}&nbsp;-->
+<!--            <mat-button-toggle-group>-->
+<!--                <mat-button-toggle *ngFor="let max of question.conf.max|loop; index as i"-->
+<!--                                   [style]="{'width' : '35px', 'height':'35px'}"-->
+<!--                                   [ngStyle]="{'background': background(i, average)}">-->
+<!--                    <h6>{{i+1}}</h6>-->
+<!--                </mat-button-toggle>-->
+<!--            </mat-button-toggle-group>-->
+<!--        </h2>-->
+<!--    </div>-->
+
+    <div *ngIf="question.conf.rating === 'emotion'">
+        <h2 class="positioning">{{average|number:"1.0-1"}}/{{question.conf.max}}
+            <mat-icon svgIcon="{{SVGIcon(average)}}" class="emoticon"></mat-icon>
+        </h2>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
+  min-width: 512px;
+  margin: 30px;
+}
+
+.link-section {
+  display: flex;
+  width: 90%;
+
+  .link-body {
+    width: 100%;
+
+    * {
+      flex-grow: 1;
+    }
+
+    .button-link {
+      outline: none;
+    }
+
+    .link-title {
+      line-height: 1.2em;
+      transform: translateY(10px);
+      font-size: 75%;
+    }
+
+    .link-content {
+      color: #007bff;
+    }
+
+    button:nth-last-child(2) {
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+
+    button {
+      height: 39px;
+      outline: none;
+    }
+  }
+}

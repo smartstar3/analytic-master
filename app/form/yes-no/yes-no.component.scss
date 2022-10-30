@@ -1,0 +1,11 @@
+#container {
+  display: flex;
+  button {
+    margin-right: 10px;
+    flex-grow: 1;
+    box-sizing: border-box;
+  }
+  button:last-child {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,88 @@
+<div class="select-field-dialog">
+    <h1 mat-dialog-title>Choose fields</h1>
+    <div mat-dialog-content>
+        <div class="dialog-body">
+            <div class="selection-container">
+                <div class="selection-label-wrapper">
+                    <span class="selection-label">Name</span>
+                </div>
+                <mat-form-field>
+                    <mat-label>Select Name Field</mat-label>
+                    <mat-select [(value)]="field.nameField" required>
+                        <mat-option *ngFor="let item of data" [value]="item">{{item}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="selection-container">
+                <div class="selection-label-wrapper">
+                    <span class="selection-label">Email</span>
+                </div>
+                <mat-form-field>
+                    <mat-label>Select Email Field</mat-label>
+                    <mat-select [(value)]="field.emailField" required>
+                        <mat-option *ngFor="let item of data" [value]="item">{{item}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="variable-list"
+                 *ngIf="field.otherFields.length"
+            >
+                <table class="variable-table">
+                    <thead>
+                    <tr>
+                        <th>Variable Name</th>
+                        <th>Variable Field</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of field.otherFields; index as i">
+                        <td>{{item.name}}</td>
+                        <td>{{item.field}}</td>
+                        <td>
+                            <button
+                                    mat-icon-button
+                                    color="primary"
+                                    (click)="removeVariable(i)"
+                            >
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <form
+                class="selection-container"
+                [formGroup]="variableForm"
+                (ngSubmit)="onVariableForm(variableForm.value)"
+            >
+                <mat-form-field>
+                    <input matInput placeholder="Variable Name" formControlName="name">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Select Additional Variable Fields</mat-label>
+                    <mat-select formControlName="field">
+                        <mat-option *ngFor="let item of data" [value]="item">{{item}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button
+                    mat-icon-button
+                    color="primary"
+                    type="submit"
+                    [disabled]="!variableForm.valid"
+                >
+                    <mat-icon>add</mat-icon>
+                </button>
+            </form>
+
+        </div>
+    </div>
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-stroked-button (click)="handleClose()">Cancel</button>
+        <button mat-flat-button color="primary" [mat-dialog-close]="field">Ok</button>
+    </div>
+</div>

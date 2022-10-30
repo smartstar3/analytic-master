@@ -1,0 +1,40 @@
+<div class="pageHeight">
+
+        <Section class="background">
+            <img class="background_img" src="/assets/img/login/login_bg.png" alt="background" />
+        </Section>
+
+        <section class="content">
+            <div class="form">
+                <div class="logo">
+                    <img class="logoImage" alt="logo" src="assets/img/Logo.png">
+                </div>
+                <span class="welcome">Welcome back</span>
+                <form [formGroup]="loginForm" class="formInput">
+                    <mat-form-field>
+                        <mat-label>Email adress</mat-label>
+                        <input matInput type="email" formControlName="email" required>
+                        <mat-error>Email is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="password" required>
+                        <mat-hint  align="end"><a class="hint" routerLink="/{{forgot}}">Forgot your password?</a></mat-hint>
+                        <mat-error>Password is required</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button id="sign-in" (click)="login(loginForm.get('email').value, loginForm.get('password').value)" [disabled]="!loginForm.valid">Log in</button>
+                </form>
+                <div class="noAccountBox">
+                    <span class="noAccount">No account yet? <a routerLink="/{{register}}" [queryParams]="queryParams">Sign up here!</a></span>
+                </div>
+            </div>
+            <div class="image">
+                <img class="background_img2" src="/assets/img/login/login_image.png" alt="login" />
+                <span class="collect">Collect feedback every day</span>
+            </div>
+        </section>
+</div>
+
+
+
+

@@ -1,0 +1,16 @@
+<div class="scalable-image">
+  <button *ngIf="isEditAble" mat-icon-button color="primary" class="scale-down-btn" (click)="minusScale($event)">
+    <mat-icon>remove</mat-icon>
+  </button>
+  <img
+    #scalableImage
+    class="image"
+    src="{{imageLink}}"
+    name="{{image.hash}}"
+    [style.width.px]="width"
+    (load)="fitImageSize()"
+  />
+  <button *ngIf="isEditAble" mat-icon-button color="primary" class="scale-up-btn" (click)="plusScale($event)">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

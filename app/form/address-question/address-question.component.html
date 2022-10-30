@@ -1,0 +1,29 @@
+<form [formGroup]="formGroup" class="form-group-address">
+  <mat-form-field class="form-input-cell-left">
+    <mat-label>Postal Code</mat-label>
+    <input matInput type="text"
+           formControlName="postalCode"
+           [readonly]="disabled">
+    <mat-error *ngIf="postalCode.invalid && postalCode.errors.required && postalCode.touched">
+      Postal Code is required
+    </mat-error>
+    <mat-error *ngIf="postalCode.invalid && postalCode.errors.pattern && postalCode.touched">
+      Postal Code has to follow the pattern: 1234 AB
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-input-cell-right">
+    <mat-label>House Number</mat-label>
+    <input matInput type="text"
+           formControlName="houseNumber"
+           [readonly]="disabled">
+    <mat-error *ngIf="houseNumber.invalid && houseNumber.errors.required && houseNumber.touched">
+      House Number is required
+    </mat-error>
+    <mat-error *ngIf="houseNumber.invalid && houseNumber.errors.pattern && houseNumber.touched">
+      House Number should be a number
+    </mat-error>
+  </mat-form-field>
+</form>
+
+<p *ngIf="receivedApiData" class="address-city"> City: {{answer.city}} </p>
+<p *ngIf="receivedApiData" class="address-street"> Street: {{answer.street}} </p>

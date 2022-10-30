@@ -1,0 +1,28 @@
+.main {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+mat-card {
+  width: 512px;
+  text-align: center;
+  overflow-wrap: break-word;
+  mat-card-content {
+    margin-top: 24px;
+  }
+  mat-card-actions {
+    margin-top: 0;
+    margin-right: 0;
+  }
+}
+.image-container {
+  margin: 2em;
+}
+
+img {
+  max-width:350px;
+  max-height:110px;
+  width: auto;
+  height: auto;
+}

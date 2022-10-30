@@ -1,0 +1,245 @@
+body,
+.header,
+.cards,
+.package {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat';
+}
+////////////////////////////////////////////////////////////////
+////////////////////////HEADER/////////////////////////////////
+
+.header {
+  min-height: 40vh;
+  height: 40vh;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  background-color: #224596;
+}
+
+.text {
+  display: flex;
+  margin: 5vh auto;
+  width: 50%;
+  min-width: 600px;
+  text-align: center;
+}
+
+.title {
+  margin: auto;
+  font-size: 3em;
+  font-weight: 900;
+  color: white;
+}
+
+.abutton {
+  margin: auto 10px;
+  width: 150px;
+  z-index: 99;
+}
+
+.blue {
+  color: white;
+  background-color: #1578c7;
+}
+
+mat-icon {
+  margin-right: 5px;
+  transform: translateY(-2px);
+}
+
+.images {
+  position: absolute;
+  width: 100%;
+  min-height: 40vh;
+  height: 40vh;
+  overflow: hidden;
+}
+
+.left {
+  float: left;
+  z-index: -1;
+  height: 75%;
+  transform: translate(-110px, 10vh);
+  animation: translateright 2s;
+}
+
+.right {
+  float: right;
+  z-index: -1;
+  height: 70%;
+  transform: translate(240px, 12vh);
+  animation: translateleft 2s;
+}
+
+@keyframes translateright {
+  0% {
+    opacity: 0;
+    transform: translate(-160px, 10vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-110px, 10vh);
+  }
+}
+
+@keyframes translateleft {
+  0% {
+    opacity: 0;
+    transform: translate(280px, 12vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(240px, 12vh);
+  }
+}
+
+@media (max-width: 1024px) {
+  .images {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .title {
+    font-size: 2em;
+  }
+
+  .text {
+    width: 90%;
+    min-width: 300px;
+  }
+}
+
+///////////////////////////////////////////////////////////
+////////////////////////CARDS//////////////////////////////
+
+.cards {
+  width: 975px;
+  transform: translateY(-7vh);
+  margin: auto;
+}
+
+.container {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  padding: 15px;
+  justify-content: space-between;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.pricecard {
+  width: 290px;
+  mat-card-title {
+    font-weight: 900;
+    transform: translateX(2px);
+  }
+  mat-card-actions {
+    text-align: center;
+    button {
+      background-color: #1578c7;
+      color: white;
+      width: 95%;
+      margin: 0 auto 20px;
+    }
+  }
+}
+
+.checkmark {
+  color: #00b300;
+  font-size: 16px;
+  transform: translateY(4px);
+}
+
+.price {
+  margin-left: 13px;
+}
+
+.fat {
+  font-weight: 900;
+}
+
+.euro {
+  margin-right: 2px;
+}
+.month {
+  font-size: 0.5em;
+}
+
+@media screen and (max-width: 976px) {
+  .cards {
+    width: 100%;
+    transform: translateY(0);
+  }
+
+  .container {
+    flex-direction: column;
+  }
+  .pricecard {
+    margin: 25px auto;
+  }
+}
+
+///////////////////////////////////////////////////////////////
+//////////////////////CHECKS///////////////////////////////////
+
+.package {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-80px);
+}
+
+.packackeTitle {
+  font-weight: 900;
+  color: black;
+  margin: auto;
+  font-size: 2em;
+}
+
+.containerCheck {
+  width: 956px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(239px, 1fr));
+  gap: 0;
+  grid-gap: 0;
+  padding: 0;
+}
+
+.packageCard {
+  width: 239px;
+}
+
+.check_circle {
+  color: forestgreen;
+  font-size: 1.1em;
+  transform: translate(10px, 2px);
+}
+
+@media screen and (max-width: 976px) {
+  .containerCheck {
+    width: 478px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .packackeTitle {
+    font-size: 1.5em;
+  }
+  .containerCheck {
+    width: 239px;
+  }
+
+  .package {
+    transform: translateY(0);
+    margin-bottom: 50px;
+  }
+}

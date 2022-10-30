@@ -1,0 +1,16 @@
+<mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+        <mat-panel-title>General</mat-panel-title>
+        <mat-panel-description></mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+        <app-build-type *ngIf="qs.get[sel.id].conf.type | allowedSetting: 'type'"></app-build-type>
+        <app-build-description *ngIf="qs.get[sel.id].conf.type | allowedSetting: 'description'"></app-build-description>
+        <app-build-rating *ngIf="qs.get[sel.id].conf.type | allowedSetting: 'rating'"></app-build-rating>
+        <app-build-text *ngIf="qs.get[sel.id].conf.type | allowedSetting: 'text'"></app-build-text>
+        <app-build-placeholder *ngIf="qs.get[sel.id].conf.type | allowedSetting: 'placeholder'"></app-build-placeholder>
+        <app-build-min-max *ngIf="qs.get[sel.id].conf.type | allowedSetting: 'minmax'"></app-build-min-max>
+        <app-build-star-amount *ngIf="qs.get[sel.id].conf.type | allowedSetting: 'star-amount'"></app-build-star-amount>
+        <app-build-choices *ngIf="qs.get[sel.id].conf.type | allowedSetting: 'choices'"></app-build-choices>
+    </ng-template>
+</mat-expansion-panel>

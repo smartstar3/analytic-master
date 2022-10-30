@@ -1,0 +1,9 @@
+<div>
+    <span *ngIf="!selected">{{content}}</span>
+    <input class="choice-input"
+           *ngIf="selected"
+           [(ngModel)]="content"
+           (blur)="updateContent()"
+           (keydown)="onKeyDown($event)"
+    />
+</div>

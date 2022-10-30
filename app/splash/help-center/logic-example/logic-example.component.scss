@@ -1,0 +1,96 @@
+.container {
+  width: 50vw;
+  transition: width 0.5s;
+  text-align: center;
+}
+
+.inner-container {
+  width: 100%;
+  text-align: left;
+  padding-top: 5vh;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+.bigger {
+  font-size: 1.5em;
+}
+
+.section {
+  padding: 2vh;
+  font-size: 1.4em;
+}
+
+a {
+  font-weight: bolder;
+  text-decoration: underline;
+  color: black;
+}
+
+.smallImage {
+  text-align: center;
+  height: 15vh;
+  min-height: 100px;
+}
+
+.image {
+  text-align: center;
+  height: 30vh;
+  min-height: 225px;
+}
+
+.bigImage {
+  text-align: center;
+  height: 40vh;
+  min-height: 325px;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+  border: #eae3e3 3px dashed;
+  border-radius: 25px;
+}
+
+@media only screen and (max-width: 959px) {
+  .container {
+    width: 80vw;
+  }
+}
+
+@media only screen and (max-width: 690px) {
+  .container {
+    width: 95vw;
+  }
+
+  .image {
+    min-height: 125px;
+  }
+
+  .bigImage {
+    min-height: 150px;
+  }
+}
+
+@media only screen and (max-width: 959px) {
+  .container {
+    width: 80vw;
+  }
+}
+
+@media only screen and (max-width: 690px) {
+  .container {
+    width: 95vw;
+    transition: width 0.5s;
+  }
+
+  .image {
+    min-height: 125px;
+  }
+
+  .bigImage {
+    min-height: 150px;
+  }
+}

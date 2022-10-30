@@ -1,0 +1,15 @@
+<div [formGroup]="control" class="filter-container">
+    <mat-form-field matDialogTitle floatLabel="never">
+        <mat-label>Filter name...</mat-label>
+        <input matInput formControlName="name">
+    </mat-form-field>
+    <div matDialogContent>
+        <logic-condition-tree [condition]="result?.data" (conditionChange)="conditionChange($event)"></logic-condition-tree>
+    </div>
+    <div class="spacing"></div>
+    <div matDialogActions [align]="'end'">
+        <button mat-stroked-button [matDialogClose]="null">Cancel</button>
+        <button mat-stroked-button color="primary" [disabled]="applied" (click)="apply()">Apply</button>
+        <button mat-flat-button color="primary" (click)="save()">Save</button>
+    </div>
+</div>

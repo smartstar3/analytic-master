@@ -1,0 +1,36 @@
+mat-form-field {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.form-group-address {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.form-input-cell-left {
+  width: 69%;
+  margin: 1%;
+  padding-right: 5px;
+}
+
+.form-input-cell-right {
+  width: 29%  ;
+}
+
+.address-city {
+  text-align: left !important;
+  padding-left: 10px;
+  color: #bbb8b8;
+  font-weight: bold;
+}
+
+.address-street {
+  padding-left: 10px;
+  text-align: left !important;
+  color: #c0c0c0;
+  font-weight: bold;
+}

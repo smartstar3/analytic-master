@@ -1,0 +1,67 @@
+mat-card {
+  width: 512px;
+  cursor: pointer;
+
+  mat-card-content {
+    margin-top: 24px;
+  }
+  mat-card-actions {
+    margin-top: 0;
+    margin-right: 0;
+  }
+  mat-card-title {
+    overflow-wrap: break-word;
+  }
+}
+
+mat-card:nth-last-child(1) {
+  margin-top: 0;
+}
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+
+  .flex-container {
+    width: 100%;
+    padding: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .group {
+      width: 512px;
+      margin-bottom: 12px !important;
+      display: flex;
+      flex-direction: column;
+      .title {
+        color: #224596;
+        font-weight: bold;
+        font-size: x-large;
+      }
+      .divider {
+        margin-bottom: 8px;
+      }
+      .msg {
+        color: #545454;
+      }
+    }
+    .flex-item {
+      margin-bottom: 24px;
+    }
+    .flex-item:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+app-start-screen {
+  cursor: pointer;
+}
+
+app-end-screen {
+  cursor: pointer;
+}

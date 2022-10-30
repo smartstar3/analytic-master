@@ -1,0 +1,57 @@
+<div *ngIf="!states.includes('archived')" class="flex-item">
+  <button class="add-button" mat-fab color="primary" (click)="createForm()"><mat-icon>add</mat-icon></button>
+</div>
+
+<ng-container>
+<div class="flex-item" *ngFor="let form of forms; let i = index">
+    <mat-card>
+
+        <div class="title-wrapper">
+            <mat-card-title>{{form.name}}</mat-card-title>
+            <div class="{{ form.state === 'published' ? 'primary' : 'gray' }}" >
+                <mat-icon class="dot" [matTooltip]="form.state" matTooltipPosition="below">fiber_manual_record</mat-icon>
+            </div>
+        </div>
+
+        <mat-card-subtitle>
+            <div *ngIf="form.state !== 'unpublished'">
+                <h6>{{form.responseCount}} response<span *ngIf="form.responseCount !== 1">s</span></h6>
+            </div>
+            <div *ngIf="form.state === 'unpublished' && form.valid === false">
+                <h6 class="warn-msg">Form contains errors</h6>
+            </div>
+        </mat-card-subtitle>
+
+      <mat-card-actions [align]="'end'">
+          <button class="main-action-button" color="primary" mat-stroked-button *ngIf="form.state!=='unpublished'" routerLink="/data/{{form.id}}" [ngStyle]="{ backgroundColor: '#e0edf9' }">Analyze</button>
+
+          <button class="main-action-button" color="primary" mat-stroked-button *ngIf="form.state==='unpublished'" routerLink="/b/{{form.id}}" [ngStyle]="{ backgroundColor: '#dbdbdb' }">Edit</button>
+
+          <button class="main-action-button" color="primary" mat-stroked-button *ngIf="form.state==='unpublished'" (click)="publish(form.id)" >Publish</button>
+
+          <button class="main-action-button" color="primary"  mat-stroked-button *ngIf="form.state==='published'" (click)="share(form.id)">Share</button>
+
+          <button class="main-action-button" color="primary"  mat-stroked-button *ngIf="form.state==='archived'" (click)="delete(form.id)">Delete</button>
+
+        <button mat-icon-button [matMenuTriggerFor]="actionMenu"><mat-icon>more_vert</mat-icon></button>
+        <mat-menu #actionMenu="matMenu">
+            <button mat-menu-item (click)="rename(form.id, form.name)">
+                <mat-icon>edit</mat-icon>Rename
+            </button>
+            <button mat-menu-item (click)="copy(form.id, form.state, form.name)">
+                <mat-icon>file_copy</mat-icon>Copy
+            </button>
+            <button mat-menu-item *ngIf="form.state !== 'archived'" [disabled]="form.state !=='published'" (click)="archive(form.id)">
+              <mat-icon>archive</mat-icon>Archive
+            </button>
+            <button mat-menu-item *ngIf="form.state ==='archived'" (click)="publish(form.id)">
+              <mat-icon>unarchive</mat-icon>Unarchive
+            </button>
+            <button mat-menu-item *ngIf="form.state !=='archived'" (click)="delete(form.id)">
+              <mat-icon>delete</mat-icon>Delete
+            </button>
+        </mat-menu>
+      </mat-card-actions>
+    </mat-card>
+</div>
+</ng-container>

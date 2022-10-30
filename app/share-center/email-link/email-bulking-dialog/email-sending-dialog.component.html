@@ -1,0 +1,9 @@
+<h3>Please wait while we process your emails...</h3>
+<h5 *ngIf="!sending && !hasError">Finished sending all emails!</h5>
+<h5 *ngIf="!sending && hasError">An issue occurred while processing your emails!</h5>
+<div id="spinnerContainer">
+  <mat-spinner *ngIf="sending"></mat-spinner>
+</div>
+<div mat-dialog-actions style="justify-content: space-between">
+  <button type="Button" mat-flat-button color="primary" [disabled]="sending" (click)="close()">Close</button>
+</div>

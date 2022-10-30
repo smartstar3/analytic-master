@@ -1,0 +1,41 @@
+mat-sidenav-container {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 64px);
+  width: 100vw;
+}
+
+mat-sidenav-content {
+  overflow-y: auto;
+}
+
+mat-sidenav {
+  padding: 16px 0;
+}
+
+.logo {
+  display: block;
+  margin-left: 8px;
+}
+
+mat-toolbar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.active {
+  background-color: #f6f6f6;
+}

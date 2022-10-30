@@ -1,0 +1,75 @@
+.image-manage-dialog {
+  position: relative;
+  height: 100%;
+
+  .close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ececec;
+    color: #1e3e8e;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .upload-image {
+    &__wrapper {
+      height: 100%;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+
+      app-upload-image {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+@media only screen and (min-width: 800px) {
+  .image-manage-dialog {
+    min-width: 500px;
+  }
+}
+
+@media only screen and (min-width: 1150px) {
+  .image-manage-dialog {
+    min-width: 850px;
+  }
+}
+
+::ng-deep {
+  .image-manage-dialog {
+    .mat-dialog-content {
+      height: 100%;
+      max-height: 75vh;
+
+      .mat-tab-group {
+        height: 100%;
+
+        .mat-tab-body-wrapper {
+          height: 100%;
+
+          .image-list-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+iframe {
+  width: 400px;
+  height: 100%;
+  overflow: hidden;
+  border: none;
+}
+
+div {
+  background-color: #232323;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+}

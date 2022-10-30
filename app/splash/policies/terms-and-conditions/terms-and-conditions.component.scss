@@ -1,0 +1,35 @@
+.container {
+  width: 50vw;
+  transition: width 0.5s;
+  text-align: center;
+}
+
+.inner-container {
+  width: 100%;
+  text-align: left;
+  padding-top: 5vh;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+.tab {
+  margin-left: 50px;
+}
+
+.section {
+  padding: 2vh;
+  font-size: 1.4em;
+}
+
+.title {
+  padding: 2vh;
+  font-size: 1.8em;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 85vw;
+  }
+}

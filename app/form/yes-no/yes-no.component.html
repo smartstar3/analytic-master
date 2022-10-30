@@ -1,0 +1,15 @@
+<div id="container" class="mat-light-theme-green">
+  <button mat-stroked-button color="primary" *ngIf="answer !== true" (click)="select(true)" [disableRipple]="disabled">
+    <mat-icon class="material-icons-outlined">check_circle</mat-icon>
+  </button>
+  <button mat-flat-button color="primary" *ngIf="answer === true" (click)="select(true)" [disableRipple]="disabled">
+      <mat-icon class="material-icons-outlined">check_circle</mat-icon>
+    </button>
+
+  <button mat-stroked-button color="warn" *ngIf="answer !== false" (click)="select(false)" [disableRipple]="disabled">
+      <mat-icon class="material-icons-outlined">cancel</mat-icon>
+    </button>
+  <button mat-flat-button color="warn" *ngIf="answer === false" (click)="select(false)" [disableRipple]="disabled">
+      <mat-icon class="material-icons-outlined">cancel</mat-icon>
+    </button>
+</div>

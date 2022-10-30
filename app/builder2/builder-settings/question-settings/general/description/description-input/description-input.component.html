@@ -1,0 +1,3 @@
+<ng-container *ngFor="let descriptionPart of value; let i = index;trackBy: trackByType;">
+    <app-description-input-part [ngModel]="descriptionPart" (ngModelChange)="_handleChange()" (input)="_handleInput($event.target.value, i)" [disabled]="disabled" (remove)="remove(i)"></app-description-input-part>
+</ng-container>

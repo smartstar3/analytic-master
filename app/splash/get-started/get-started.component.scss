@@ -1,0 +1,43 @@
+.get-started {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  min-height: 30vh;
+  align-items: center;
+  flex-direction: column;
+  background-color: #1578c7;
+  font-family: 'Montserrat';
+}
+
+.body {
+  width: 33%;
+  text-align: center;
+}
+
+.title {
+  color: white;
+  font-size: 2em;
+  font-weight: 700;
+  margin: 35px auto;
+}
+
+.subTitle {
+  color: white;
+}
+
+button {
+  width: 175px;
+  margin: 2em auto;
+  color: #1578c7;
+}
+
+@media screen and (max-width: 1024px) {
+  .body {
+    width: 80%;
+  }
+
+  .title {
+    font-size: 1.25em;
+    font-weight: 800;
+  }
+}

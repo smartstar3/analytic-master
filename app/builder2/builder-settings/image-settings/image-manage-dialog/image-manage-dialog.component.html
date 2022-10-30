@@ -1,0 +1,22 @@
+<div class="image-manage-dialog">
+    <button class="close-btn" (click)="handleClose()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <h1 mat-dialog-title>Image Manager</h1>
+    <div mat-dialog-content>
+        <mat-tab-group>
+            <mat-tab label="Upload File">
+                <ng-template matTabContent>
+                    <div class="upload-image__wrapper">
+                        <app-upload-image></app-upload-image>
+                    </div>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="Image List">
+                <ng-template matTabContent>
+                    <app-image-list></app-image-list>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

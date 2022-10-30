@@ -1,0 +1,17 @@
+<mat-form-field appearance="outline" *ngIf="qs.get[sel.id]?.conf.min !== undefined">
+    <mat-label>Minimum (Optional)</mat-label>
+    <input matInput type="number" placeholder="Set minimum..." [formControl]="minControl"
+           [errorStateMatcher]="minErrMatcher" (blur)="showErrState()">
+    <ng-container *ngIf="minError?.valueChange|async as errorState">
+        <mat-error *ngIf="errorState.error">{{errorState.error}}</mat-error>
+    </ng-container>
+</mat-form-field>
+<mat-form-field appearance="outline" *ngIf="qs.get[sel.id]?.conf.max !== undefined">
+    <mat-label>Maximum (Optional)</mat-label>
+    <input matInput type="number" placeholder="Set maximum..." [formControl]="maxControl"
+           [errorStateMatcher]="maxErrMatcher" (blur)="showErrState()">
+    <ng-container *ngIf="maxError?.valueChange|async as errorState">
+        <mat-error *ngIf="errorState.error">{{errorState.error}}</mat-error>
+    </ng-container>
+</mat-form-field>
+

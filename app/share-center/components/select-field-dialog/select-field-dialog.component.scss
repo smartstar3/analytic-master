@@ -1,0 +1,86 @@
+.select-field-dialog {
+  .dialog-body {
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+
+    .selection-container {
+      display: flex;
+      align-items: center;
+
+      .selection-label-wrapper {
+        min-width: 75px;
+        margin-right: 10px;
+      }
+
+      mat-form-field {
+        width: 100%;
+        margin-right: 20px;
+
+        .mat-form-field-wrapper {
+          background: blue !important;
+        }
+
+        .mat-form-field-label-wrapper {
+          color: rgba(0, 0, 0, 0.54) !important;
+        }
+      }
+    }
+
+    .variable-list {
+      margin-top: 10px;
+
+      .variable-table {
+        width: 100%;
+
+        td {
+          &:last-child {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .selection-container {
+    mat-form-field {
+      &.mat-form-field-invalid {
+        .mat-form-field-label {
+          color: rgba(0, 0, 0, 0.54);
+        }
+
+        .mat-input-element {
+          caret-color: rgba(0, 0, 0, 0.54);
+        }
+
+        .mat-form-field-ripple {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &.mat-focused {
+          .mat-form-field-ripple {
+            background-color: #224596;
+          }
+
+          .mat-form-field-label {
+            color: #224596;
+          }
+        }
+      }
+
+      .mat-select.mat-select-invalid {
+        .mat-select-arrow {
+          color: rgba(0, 0, 0, 0.54);
+        }
+
+        &.mat-focused {
+          .mat-select-arrow {
+            color: #224596;
+          }
+        }
+      }
+    }
+  }
+}
